@@ -1,0 +1,75 @@
+\begin{table}
+\caption{A sample of the manual and automatic {\em methods} available for exploring the SE literature.
+The point of this proposal is to offer the infrastructure 
+that lets  SE
+community decide   how to make best use of these methods.
+Note that this list is incomplete since researchers are
+regularly proposing new approaches. Note also that while we present this list as a {\em linear} process (running from top to bottom), 
+SLRs are usually a {\em cyclic process} where analysts make multiple iterations  across  these methods.}\label{tbl:overview}
+\begin{center}
+ {\small
+  \begin{tabular}{p{1.5cm}|p{5.5cm}|p{8.3cm}}
+    \rowcolor{gray}   & \textcolor{white}{Primarily manual methods} & \textcolor{white}{Automated AI-based text mining methods }  \\
+    \hline
+    1a. 
+    \newline Define \newline research \newline question &   Read many papers (a very slow process)~\cite{kitchenham2004evidence,keele2007guidelines,marshall2013tools}. If there was a repository on prior questions we could explore them. &
+    \bii
+    \item {\em Dcluster:} Clustering documents with (e.g.) topic modeling~\cite{Mathew_2018};
+    \item {\em Qcluster:} Cluster old queries to find common patterns in queries (and results);
+    \item Find the gaps (clusters with low frequencies).
+    \eii  \\\hline\rowcolor{blue!10}
+    1b. \newline Identify  keywords& Extract keywords from research question topics and known related literature &
+    \bii
+    \item Extract candidate words from {\em Qclusters};
+    \item Use feature selection (e.g. TF-IDF or RELIEF on support vectors);
+    \item Auditing the keywords with synonym discovery (PCA~\cite{Wold1987Principal}, Word2Vec~\cite{mikolov2013efficient}). 
+    \item Use of information extraction tools~\cite{Cruzes2007Automated}. 
+    \eii \\
+    \hline
+    1c.\newline Create search string  & 
+    \bii
+    \item
+    Use synonyms of keywords to identify terms for search string.
+    \item
+    Using subject matter experts (hard, they are hard to find).
+    \item
+    Use of gold standard to refine the search string~\cite{zhang2011empirical}.
+    \eii &
+    \bii
+    \item Construct most informative search strings using  active learning~\cite{Yu2018,Yu2019};
+    \item Using  SVMs, cull terms  explore those found most often
+    far from hyperspace boundary;
+    \item Apply Word2Vec~\cite{mikolov2013efficient} to extend query with keyword synonyms (as done in \cite{georgeLN}).
+    \eii \\
+    \hline\rowcolor{blue!10}
+    2. \newline Search databases \cite{kitchenham2004evidence,keele2007guidelines}& \bii
+    \item
+    Snowballing~\cite{jalali2012systematic}.
+    \item
+    Use various permutations of search string in each database (sometimes requiring multiple searches per database) 
+    \eii & AI
+    not required for this task. However, with automatic tool supports, the time required for this task can be  greatly reduced. 
+    \\
+    \hline
+    3. \newline Select \newline relevant papers&Current practice: a mostly manual process~\cite{kitchenham2004evidence,keele2007guidelines,hassler2016identification}&
+    \bii
+    \item Use active learning trained/updated on human review results to recommend what next to be reviewed~\cite{Yu2018,Yu2019}.
+    \item Try initializing queries with results from {\em Qcluster}~\cite{Pan2010A}. 
+    \item Explore using information other than title and abstracts, e.g. use full-text information or summary of text~\cite{summary1,summary2,summary3} 
+    \eii\\
+    \hline\rowcolor{blue!10}
+    4. \newline Assess\newline quality  & Some checklists (number of subjects, type of studies, e.g bad smells)~\cite{kitchenham2004evidence,keele2007guidelines} & Not currently explored
+    by AI tools~\cite{marshall2013tools}. This might be a matter of entity recognition~\cite{manning-EtAl:2014:P14-5} over checklist but really cannot be definitive at this time. %This is an area where we hope some share data and shared conventions on how to integrate tools would enable more experiment and more tools in the future. 
+    \\    \hline
+    5. \newline Extract data & Manual process: reading the the actual papers. E.g. run over a pdf and add mark ups over the text (so you can localize where you look)~\cite{kitchenham2004evidence,keele2007guidelines}.  & Topic modeling and visualization tools might help here~\cite{Felizardo2010An,Torres2012Automatic}\\
+    \hline\rowcolor{blue!10}
+    6. \newline Synthesis of results &  Manual work with help using  tools~\cite{kitchenham2004evidence,keele2007guidelines,marshall2013tools}. & Visualization might be able to help this process~\cite{Cruzes2007Using,Felizardo2011Analysing,Felizardo2010An} \\
+    \hline
+    7. \newline Summary of papers&   & Not done right now. But summarizing of technical artifacts is an emerging natural language technology~\cite{gambhir2017recent} so we can look to much improvement in this area, in the near future. \\\hline
+  \end{tabular}
+ 
+}
+\end{center}
+
+
+\end{table} 

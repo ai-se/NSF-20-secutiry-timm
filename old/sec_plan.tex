@@ -1,0 +1,208 @@
+% Before explaining our plan, we note that  
+% understanding the literature is not some
+% deterministic ``on size fits all'' process. Rather, in our experience, 
+% it is an  exploratory process where  analytics 
+% struggle to tame some knowledge source by trying
+% a range of methods. 
+% In order to support such an exploratory process it is important {\em not} to offer
+% one tool but rather {\em workflow construction} tools where analysts can mix-and-match between various utilities.  For  a sample of such uitlities,
+% see \tbl{overview}.
+
+ 
+\noindent
+To build {\IT} and introduce it to its target community, we will
+undertake the following steps:
+\bii
+\item Initialize: see \tion{init};
+\item Combine: see \tion{combine};
+\item Popularize: see \tion{pop};
+\item Support: see \tion{sup};
+\item Audit: see \tion{aud};
+\item Assess and report: see \tion{ass};
+\eii
+\vspace{4pt}
+Table~\ref{tab:Schedule} shows our schedule. The rest of this section discusses the details of each step.
+ 
+ 
+	%\centering
+	%\caption{Project Schedule}
+	%\label{table-schedule}
+\begin{center}
+\input{table-schedule}
+\end{center}
+%\end{table}
+ 
+
+\subsection{INITIALIZE}\label{tion:init} Collect together methods that implement each cell of 
+\tbl{overview}. Note that the number of methods we collect will grow over time but initially our intent is to have at least two methods for each cell of \tbl{overview}.
+We will involve the students from both UA and NCSU in this process.
+The UA students will focus primarily on understanding the limitations of the manual approaches and how the information does (or does not) flow among them.
+The NCSU students will focus primarily on the automated AI-based text mining approaches.
+\vspace{8pt}
+
+
+\subsection{COMBINE}\label{tion:combine} 
+Develop manual and automatic methods of building workflows from those utilities to explore the literature using our materials.
+Our plan here is not to unify these tools at the binary level (since that may require too much rework of, e.g., tools written in different languages). Rather, we plan to mount the core functionality of these tools within RESTful APIs then develop a lightweight JSON notation that allows one method to be wired into the next.
+The NCSU students will support this effort in understanding and combining the various AI-based text mining tools.
+
+Also, for the mostly manual methods, we will build  demons that look for problems in the output forms of those processes (e.g. missing headings or entries; entries of the wrong type; ``too few'' rows in this particular spreadsheet-- where ``too few'' is a some domain-specific human criteria).
+The UA students will support this effort by identifying the smells in the process and building the demons to overcome those problems.
+
+During this {\em COMBINE} phase we will conduct extensive explorations of different workflows, run on different data.
+Note that one of our collaborators (see letter from Ann Gabriel from Elsevier) has volunteered the resources required
+to access extensive information about SE publications.
+
+\vspace{8pt}
+
+\subsection{POPULARIZE}\label{tion:pop}
+\noindent
+To popularize {\IT} we will:
+\bii
+\item Run one-on-one sessions.
+\item Run large workshops.
+\eii
+The one-on-one sessions with be   in-person tool evaluations  where industrial practitioners and international researchers (a)~develop their own
+workflows to review their own material; then (b)~offer feedback on the benefits and drawback on our methods (and also, what is missing from those methods).
+One interesting result from this work will be to check the delta between the kinds of things research and industrial workers search for.
+
+During this {\em POPULARIZE} phase we will need the support of prominent members of the research community to help
+us collect participants for the one-on-one sessions. Note that one of our  collaborators (see letter from Martin Shepperd) is a world-renowned  empirical software engineering researcher. Using his contacts, plus our own, we anticipate having
+numerous test subjects for our tools.
+
+
+These one-on-one sessions will let us
+collect statistics on our first three evaluation criteria; i.e.
+for any method, is it:
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\item Easy to learn?
+\item Does it find  more relevant
+items than some other method? 
+\item Is it easy to apply?  
+\end{enumerate}
+Note that items (2,3) are comparative measures where, to collect
+these statistics, we will conduct introductory sessions were some prior SLR
+is offered as a training exercise and participants are asked to spend a fixed amount of time trying to reproduce that work.
+
+The workshops will be invitation events that invite leading figures in empirical SE to use and review our tools. 
+Two important outcomes
+of these workshops will be:
+\bi
+\item
+Statements of  the ``path not taken''; i.e. 
+ important method that we have neglected to add into {\IT}.
+\item
+The creation of a shared understanding within the community
+of what minimal set of methods are most useful for AI-based literature
+reviews\footnote{We anticipate this will take a few years to evolve.
+Hence we propose a series of workshops}.
+\ei
+We will run these meetings  at leading SE venues (FSE, ICSE, etc\footnote{We are happy to report
+that  since FSE'16 we have seen  growing number of industrial practitioners at formerly totally academic conferences. Hence we know we can find industrial ``guinea pigs'' by
+visiting academic conferences.}) and, if invited, at industrial sites.
+We anticipate the involvement of the students from both UA and NCSU in the planning and execution of these workshops.
+Because we will gather a large amount of observational data, we will benefit from the large team working on this project.
+\vspace{8pt}
+
+\begin{table}[!t]
+{\small 
+\begin{tabular}{|p{.95\linewidth}|}\hline
+ co-PI Menzies has had much recent success applying
+automatic hyperparameter optimization to improve AI tools~\cite{fu2016tuning,chen2017riot,nair2017flash,agrawal2017better,agrawal2017better,chen2017beyond,nair2016accidental,agrawal2016wrong}.
+For example ~\cite{nair18},  
+Bayesian Parameter Optimization  (BPO) is a 
+hyperparameter optimization method that combines optimization
+with 
+incremental learning.
+BPO assumes that it is easy to  find examples (e.g. source code) but expensive to score those examples
+(e.g. to ask a human to score a document as ``relevant'' or not).  The following pseudocode for  BPO  shows how it  minimizes
+  scoring   via  collecting information on only the most interesting examples.
+\bii
+\item
+Start with data $D$ and a small sample $S \subset D$ of, say, 20 examples,
+labelled with their  goals values.
+\item
+Using $S$ and a  data miner, build one model per goal. 
+\item
+Using those models, guess goal values for  
+$D-S$.
+\item
+Select   $X \in D-S$ with the best  guesses.
+\item
+Evaluate  $X$s' goals. 
+\item
+Let $S=S+X$.  
+\item Repeat.
+\eii
+Our experiments show that with  CART as the data miner,
+BPO for software configuration problems outperforms  state-of-the-art 
+prior results~\cite{zuluaga2016varepsilon} (that used
+Gaussian Process Models). 
+\\\hline
+ \end{tabular}}
+\caption{When humans find it difficult to make choices
+about what AI text mining tools to use, or how to tune this tools,
+Bayesian Parameter Optimization
+is a very fast automatic hyperparameter optimization
+method (requires only a few dozen
+attempts to find good parameters).}\label{tbl:bpo}
+\end{table}
+
+
+\subsection{SUPPORT}\label{tion:sup} One popularized, many research teams from around the world will be using these tools. In this part of the work,
+the NCSU and UA graduate students will be particular busy supporting many remote teams.
+These support sessions will include help on using the tools and general support about performing the steps in the SLR process with the tools.
+
+During these helpdesk sessions we will be able
+to collect statistics on  other evaluation measures:
+\begin{enumerate}[resume,itemsep=0pt,parsep=0pt]
+\item
+The ``return factor''; i.e. do researchers  elect to use  parts
+of {\IT} not just once, but multiple times?
+\item
+The ``ignore factor''; i.e. are some  method   in {\IT} never used by other researchers?
+\end{enumerate}
+We will also keep a watching brief in the literature to
+collect statistics on another    evaluation measures:
+
+\begin{enumerate}[resume,itemsep=0pt,parsep=0pt]
+\item
+The ``publication factor''; i.e. published papers based their conclusions on methods taken     {\IT}.
+\end{enumerate}
+
+
+
+
+\subsection{AUDIT}\label{tion:aud}
+Once the tools are in widespread use, we will have access to numerous case
+studies where humans have analyzed some text corpus using (e.g.) some
+particular collection of methods  from \tbl{overview}. In this {\em audit} step, we will re-run the SLRs to learn if any part of those methods can be excluded
+(without hurting the results) or if some other additional method helps the reasoning.
+The UA and NCSU students will be particularly helpful during the process of re-running the SLRs using the approach.
+
+In this part of the work we will apply our automatic
+{\em hyperparameter optimization methods}.
+Hyperparameter
+optimization is the process
+of choosing the control
+parameters of an AI tool
+(e.g. how many trees in a Random Forest, or for SVMs, what parameter settings for the kernel?). Hyperparameter optimization is useful since deciding the control parameters of a data miner is somewhat of a black art. Hence, it is useful if some automatic method determines the best settings. \tbl{bpo} describes  one such automatic method
+called 
+{\em Bayesian Parameter Optimization}, which is one
+active learning-based methods for finding those hyperparameters.
+That is, like FASTREAD, our preferred optimizaer
+find the next best thing to try by
+reflecting on  the models
+built this far.
+The NCSU students will be particularly helpful in this phase of the work.
+
+In addition, we will analyze the information gathered during the Popularize and Support phases to provid insights into how various human users view the tools.
+The UA students will perform much of this analysis on human aspects with the goal of identifying areas where the workflows can be improved and addressing areas that are problematic for our users.
+\vspace{8pt}
+
+\subsection{Assess and Report}\label{tion:ass}
+
+In this part of the work we will
+ review our lessons learned and document the communities agreement (or otherwise) on what AI tools should/should not be applied to SLRs.
+\vspace{8pt}  
+ 

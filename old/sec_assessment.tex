@@ -1,0 +1,67 @@
+
+
+
+
+Once we debug the interfaces between the methods of \tbl{overview}, then we will be able to
+code up multile ``SLR workflows'' that use different subsets of \tbl{overview}.
+\fig{workflow} shows examples of three such workflows. 
+The core question of this work is this:  is the added complexity of more complex workflows
+necessary? To answer this question, researchers using our infrastructure will perform and repeat literature reviews. From  that  data  we  will  be  able  to  comment  on  value-added  (if  it  exists)  of  the more
+complex workflow versus  doing something fully manual (like Workflow(a) in \fig{workflow}) or something somewhat more intricate (like Workflow(b) in \fig{workflow}).
+
+
+{\IT} will be seen to be a  success
+when the toolkit can conclude that   SLR workflow1 is ``better than'' workFlow2 (where ``better'' is defined below).
+Note that such a conclusion would need to be based on results of dozens of literature reviews.  
+To find those reviews, we will lever
+the community nature of this work.
+Since we plan to acquire a large number of SLRs
+from our collaborators, we will have access to numerous SLR case studies-- some of which 
+repeat prior SLRs. This will   allow us to compare the results of {\IT}'s manual+automatic methods
+against traditional methods. 
+Other SLRs will be for new research questions, thus allowing us
+to understand the ease (or otherwise) of applying {\IT} to new domains.
+
+\begin{figure}[!b]
+    \centering
+    \subfloat[An example workflow for searching and selection, following the current practice of manual SLRs~\cite{jalali2012systematic}.]
+    {
+        \includegraphics[width=0.30\linewidth]{workflow1.pdf}
+    }\quad
+    \subfloat[An example workflow for searching and selection, applying text mining and active learning tools to SLRs~\cite{Yu2018,Yu2019}.]
+    {
+        \includegraphics[width=0.31\linewidth]{workflow2.pdf}
+    }\quad
+    \subfloat[An example workflow for searching and selection, which combines Workflow(a) and (b).]
+    {
+        \includegraphics[width=0.295\linewidth]{workflow3.pdf}
+    }
+    \caption{Example alternative workflows for searching and selection where Workflow(c) = Workflow(a) + Workflow(b).}
+    \label{fig:workflow}
+\end{figure}
+
+\noindent
+We will say that 
+Workflow1 is ``better'' than Worfkflow2 if the methods in Workflow1 are:
+\begin{enumerate}[itemsep=0pt,parsep=0pt]
+\item Easier to learn.
+\item Finds more relevant
+items than Workflow2 (where ``relevant'' is judged by a human being). 
+\item Faster to apply. This is an important criteria since manual SLR require  days to weeks to complete.
+\end{enumerate}
+Other ``better'' measures include:
+\begin{enumerate}[resume,itemsep=0pt,parsep=0pt]
+\item
+The ``return factor''; i.e. other researchers  elect to use Workflow1 not just once, but multiple times. 
+\item
+The ``ignore factor''; i.e. some method is in {\IT} but it is never used by researchers other than ourselves
+(and ``better'' methods are ignored ``less'').
+\item
+The ``publication factor''; i.e. published papers based their conclusions on methods taken     {\IT}.
+\end{enumerate}
+Note that items 1,2,3 could be assessed in controlled laboratory settings while 4,5,6 would take months to years to collect.
+Hence, for items 1,2,3, we request funds for travel to senior conference venues where we will conduct controlled experiments where current
+SE researchers use our tools. Also, for items 4,5,6 we request funds for a multi-year project.
+\vspace{8pt}
+
+\input{sec_evaluation}

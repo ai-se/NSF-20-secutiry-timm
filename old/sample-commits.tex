@@ -1,0 +1,30 @@
+\begin{table*}
+\scriptsize
+\begin{center}
+\caption{Commit labelled  ``worrying'' by 
+a keyword method (from Commit.Guru\cite{commitguru})) or   $F^3T$. 
+Right-hand side comment comes from a manual inspection.}
+\begin{tabular}{l|cc|c}
+\renewcommand{\baselinestretch}{0.5}
+  \rowcolor{gray!30}               & \multicolumn{2}{|c|}{Label=``worrying?''} & Comment on the\\
+ \rowcolor{gray!30} Commit message & Keyword & $F^3T$ &  Keyword labels\\ 
+\hline
+\texttt{fixed: rmsd\_fit\_trj() failed to write a XTC file} & y & y &   \\ 
+\texttt{fixes Issue 143: alignto() now checks that the two selections describe the same atoms} & y &	y &   \\ 
+\texttt{Correct bugs due to merge (rhotoxc)}	& y &	y & Correct\\ 
+\texttt{Convert tsmear to tphysel in vtorhotf.F90} &	n &	n &  \\ 
+\texttt{Universe can load multiple trajectories from positional args} &	n &	n &   \\ \hline
+\texttt{NetCDFWriter working (closes Issue 109)}	& n &	y &  \\ 
+\texttt{Correction in magnetization rotation (DFPT+PAW)} &	n &	y &  \\
+\texttt{Add missing module dependency} &	n &	y & False-Negative\\ 
+\texttt{Correct dfptnl\_pert.F90 for parallel computations} &	n &	y &  \\ 
+\texttt{Test for issue \#352 now pass} &	n &	y &  \\ \hline
+\texttt{documentation updates and fixes} &	y &	n &   \\ 
+\texttt{Removed unused expected error from Selections} &	y &	n &   \\ 
+\texttt{Test for HOLE changed form error to warning when HOLE binaray is not there} &	y &	n & False-Positive  \\ 
+\texttt{Added CHANGELOG entry for fix of Issue \#550.} &	y &	n &  \\ 
+\texttt{Make error message clearer in tests for TPR parser} &	y &	n &   \\ \hline
+\end{tabular}
+\label{tbl:sample}
+\end{center} 
+\end{table*}

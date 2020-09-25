@@ -1,0 +1,42 @@
+At those workshops, participants reviewed a range of
+SLR support tools.
+They found that SLRs still suffer from a lack of complete tool support.
+According to a mapping study~\cite{Marshall-Brereton:13}, 11 SLR-related tools are described in the SE literature. 
+Most of these tools (7 of 11) target the selection of studies to include in the review~\cite{MS:11,MS:13,MS:14,MS:21,MS:22}, the extraction of data~\cite{MS:12,MS:18,MS:21}, or the synthesis of data~\cite{MS:12,MS:16,MS:17,MS:20}.
+Three of the other tools~\cite{MS:15,MS:19,MS:23} target the entire SLR process.
+The remaining tool~\cite{MS:24} targets the identification of candidate studies.
+Unfortunately, most of the tools identified by the mapping study~\cite{Marshall-Brereton:13} are either in early stages of development or are not freely available.
+Furthermore, only two of those tools~\cite{MS:18,MS:23} have been evaluated independently~\cite{Marshall-Brereton:13}.
+
+Starting from the list in the mapping study~\cite{Marshall-Brereton:13}, we selected the three tools that were specifically focused on SLRs, targeted multiple phases of the SLR process, and were freely available (SLuRP, StART, and SLR-Tool).
+We also identified two additional tools not covered in the mapping study (SLRTOOL and Parsifal).
+(Note that we excluded ReVis and PEx from our evaluation because there are designed to support single phases of the SLR process. However, we will include those tools in our construction of SAInT, where appropriate.)
+Using information from the literature and our own evaluation of the tools, we documented each tool's features and limitations~\cite{Al-Zubidy-Carver:14}.
+Based on the detailed results of the Community Workshops, we analyzed each tool's features to determine whether they covered any or all of the desired features.
+We iterated the results of our analysis with each tool's authors to ensure we had accurately characterized them.
+Table~\ref{table-tools} summarizes our findings and shows that none of the tools fully support the requirements for the entire SLR process.
+
+\begin{table}
+	\centering
+	\caption{Tools - \ding{51} = fully covered; \ding{119} = partially covered; \ding{109} = not covered. The important observation to be made from this table is that all the current SLR tools
+	offer partial support for parts of the SLR process. This table lends suppport
+	to the design premises of {\IT}; i.e. (a)~that
+	no single tool offers support for the entirety of SLRs; and (b)~best results come from combining
+	the capabilities of multiple tools.}
+	\input{table-tools}
+	\label{table-tools}
+\end{table}
+
+The problem of incomplete SLR tool support is not restricted to just the SE community.
+The medical community often uses the following tools to support SLRs.
+Note that neither tool provides much support for the planning or execution phases of the SLR process:
+\bi
+\item
+RevMan~\cite{RevMan} focuses primarily on the documentation phase of SLRs performed under the guidelines of the Cochrane Collaboration. 
+It facilitates the preparation of formatted tables and version tracking. 
+\item
+Archie~\cite{Archie} is the central repository for RevMan and is used to store completed reviews. 
+\ei
+Review of the medical literature and interaction with an MD who participate in our first workshop showed that the medical community faces many of the same problems faced by the SE community.
+Many of these barriers relate to the difficulties faced during searching~\cite{Bouamrane-etal:11, Frunza-etal:10, Young-Ward:01, Zwolsman-etal:13, Zwolsman-etal:12, Lai-etal:10}.
+\vspace{8pt}

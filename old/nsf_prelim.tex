@@ -1,0 +1,186 @@
+ 
+ \newcommand{\IT}{\textsf{\textbf{{SAInT}}}}
+ 
+ \newcommand{\head}[1]{\noindent\underline{{\bf #1:}}}
+ 
+ \noindent\begin{tabular}{|r@{~: ~}p{12.3cm}|}\hline
+ Title &
+\IT~: Bridging the Gap from Research to Practical Advice
+\\
+Project type &  CI-NEW\\
+Project Personnel &
+ Lead Institution: University of Alabama \newline
+ Institutions submitting collaborative proposals:  NC State\newline
+ Other Collaborators:  No External Collaborators\\
+CISE core division: & CCF\\
+Projected budget total & \$1.6M \\
+Keywords&  text mining, web-based collaboration, tool integration\\\hline
+\end{tabular}
+~\vspace{2mm}
+
+\head{DESCRIPTION OF INFRASTRUCTURE}
+Increasing interest in software engineering has led to vast amounts of published research.
+This flood of results means that it is not possible for people to read everything. 
+Therefore, important results are potentially being hidden from industry in the torrent of information.
+
+\begin{wraptable}{r}{3in}
+{\footnotesize
+\begin{tabular}{|p{2.9in}|}\hline
+(1)~clustering;
+(2)~snowballing;
+(3)~topic modeling;
+(4)~active learning;
+(5)~synonym discovery;
+(6)~entity recognition; 
+(7)~automatic paper summarization; 
+(8)~checklists to assess output quality; 
+(9)~SVM classification;
+(10)~pre-processing (L2-normalization, TF*IDF);
+(11)~manual browsing through visualizations of document clusters;
+(12)~selection methods for quickly pruning irrelevant texts;
+(13)~heuristics for web slurping multiple databases; stemming; stop words;     
+(14)~search on title and/or abstract and/or full text; query string mutation; 
+(15)~manual/automatic methods for deduplication of identified papers\\
+%(16)~etc.\\
+\hline
+\end{tabular}}
+\caption{An incomplete list of methods for  studying  very large collections of research papers
+}\label{tbl:methods}
+\end{wraptable}
+~{\em Systematic Literature Reviews (SLRs)} are a principled method for identifying, analyzing, and synthesizing all these papers.
+SLRs are primarily manual and quite time consuming (weeks to months of effort). 
+Table~\ref{tbl:methods} lists manual and automatic methods that can reduce that cost. 
+There is no consensus on (a)~which combination of these these methods are most cost effective or (b)~which combination of methods should be depreciated.  
+Such a consensus is required to provide scientific repeatability, improve coverage, reduce individual human labor and errors, and allow for iteration and improvement of SLRs as new material becomes available. 
+
+Therefore, we propose  \textit{\underline{S}LR \underline{A}rtificial \underline{In}telligence \underline{T}oolkit} ({\IT}):
+an integrated environment that supports the entire SLR process through a mash-up of existing, manual SLR tools and AI-based tools to substantially automate the process.
+%a workbench where we can watch industrial+research colleagues as they mix and match methods for reading the literature; which are then tested on case study materials.
+~{\IT} will contain (a)~documentation on use of the manual methods in Table~\ref{tbl:methods}; (b)~implementations of the automatic methods; and (c)~case study materials where users can practice applying (a+b) to (c). 
+Our recent work has identified case studies where SE researchers searched $10^4$ papers to identify the $10^2$ relevant to a particular SLR query. 
+As part of our work, we will collect materials from dozens more  studies (to use
+to reuse and evolve   methods that can query  numerous research papers).
+
+We will develop~{\IT} so that it provides a lightweight API syntax (using JSON or YAML files) and provide data interchange facilities so users can build their own workflows by plugging-in existing tools, properly wrapped with the data interchange API calls.
+For features that are not well-supported by existing tools, we will create additional plug-ins.
+Throughout development, we will host~{\IT} in a public Github repository to enable download and use by industrial and research practitioners.
+
+Building the {\IT} infrastructure is primarily a development task rather than a core research task. 
+Many of the methods offered in {\IT} come from existing products of prior research.
+The combinations of those methods provided by {\IT} may be unique. 
+The funds from this grant will support graduate students who build additional necessary functionality and create the case study material.
+These students will also conduct additional case studies to illustrate various workflows.
+We will use the results of these studies ``advertise'' the value of {\IT} to the SE community. 
+We also plan an extensive workshop program to publicize {\IT}. 
+By the end of the grant, external users will be making use of {\IT} with the graduate students providing support, maintenance, and evolution.
+
+\head{CISE RESEARCH FOCUS}
+In their September 2018 \textit{IEEE Software} article, Claire Le Goues, Mary Shaw, et al. lamented the poor connection between research discoveries and the practical needs of practitioners. 
+They dream of the day when there is a ``a system that allows researchers and practitioners to reliably synthesize research results into actionable, real-world guidance.'' 
+Their proposed approach endorses  literature reviews that ``make  explicit recommendations on practice, clearly labeled with strength of recommendation reflecting the level of rigor of the underlying evidence.''
+It is this dream that intend to enable with {\IT}.
+
+The PIs of this proposal have extensive experience in creating, evaluating and (partially) automating SLRs.  
+In PI Carver's CRI Planning Grant (NSF CNS1305395) he performed an extensive literature survey and conducted two international workshops to gather information about how researchers conduct SLRs in practice.
+Accordingly, we strongly applaud the ambition of Le Goues, Shaw et al., and design {\IT} to answer the question {\em what methods should the SE community condone as appropriate for reading large numbers of research reports?} 
+
+{\IT} will help teams of software engineering (SE) researchers produce unbiased, repeatable, comprehensive SLRs. 
+{\IT} will enable SE researchers and SLR authors to: 
+(1) better ground new research in existing literature, 
+(2) ensure that replicated studies are well conceived, 
+(3) ease the integration of related studies, 
+(4) work collaboratively, and
+(5) produce more impactful conclusions that are relevant to industry. 
+{\IT} will enable researchers, who may be geographically distributed, to collaboratively plan, conduct, and document SLRs by providing persistence of searches, protocols, and search results. 
+{\IT} will also support the iterative nature of SLRs by allowing researchers to return to previous phases of the SLR easily. 
+In addition, researchers will be able to leverage previous SLR protocols in the planning and execution of new research. 
+To increase the size of the CISE research community, {\IT} will help PhD Students and novice SLR authors plan, conduct, and document SLRs.
+%, resulting in more impactful research results and conclusions.
+
+
+\head{SAMPLE RESEARCH PROJECT}
+{\IT} will enable two types of research.
+First, for researchers conducting SLRs, {\IT} will provide the means by which teams of researchers can more easily produce unbiased, repeatable, comprehensive SLRs. 
+Specifically, {\IT} will use AI to automate (or partially automate) 
+(1) search and selection of primary studies, 
+(2) extraction, evaluation, and synthesis of those papers, and 
+(3) updates of published SLRs to incorporate new research results.
+Second, for researchers interested in improving the SLR process, {\IT} will allow for the evaluation of different SLR workflows.
+For example, we have recently conducted ``reading simulations'' of two large-scale literature reviews (Hall's TSE'12 and  Kithenham's 2010 IST).
+We compared the use of \textit{active learning} for identifying relevant papers against a manual approach.
+The active learning approach helps researchers find 95\% of the relevant studies after reviewing an order of magnitude fewer papers. 
+{\IT} will support replication of this type of study to provide evidence to the community of the value of such an approach.
+
+\head{NATURE OF COMMUNITY INVOLVEMENT}
+First, from  community workshops and surveys (conducted as part of a CRI Planning Grant: NSF CNS1305395), we have contacts and interactions with many of the researchers/SLR authors who conduct SLRs and with all of the SLR tool developers. 
+We have commitments from the tool developers to integrate their tools into the {\IT} infrastructure and to provide formative evaluation during its development. 
+Second, we will use our connections with local industry to provide feedback on the SLRs performed using {\IT} to ensure the results are useful for practice.
+
+\head{RELEVANCE TO CISE}
+The PI (Carver) and CoPI (Menzies) both represent the CISE community. 
+The CISE research communities that will benefit from this proposal include: researchers who conduct SLRs, SLR tool authors, and SE practitioners. 
+Furthermore, we plan to establish an advisory board consisting of representatives from all three of these constituent groups who can provide direct influence on the development and evaluation of {\IT}. 
+%This proposal is a followup to a CRI Planning Grant CNS1305395 described in an earlier section.
+
+
+
+% \bibliographystyle{plain}
+% \bibliography{proposal}
+
+\end{document}
+\begin{comment}
+\underline{AI}-enhanced   Literature 
+\underline{R}eview \underline{I}nfrastructure for \underline{SE}
+
+A Systematic Literature Review (SLR) is a formal, repeatable method by which a researcher can identify,
+evaluate, and interpret the available research about a research question or topic. 
+The primary difference
+between an SLR and a traditional a d hoc literature review is that an SLR requires advanced planning and
+strict adherence to that plan. 
+Prior to conducting the SLR, the researchers must develop and validate a protocol that defines: the guiding research question(s), the search strategy (including specific databases and keywords), the criteria for choosing appropriate papers, a quality assessment criteria, the specific information to be extracted from each paper, and a plan for synthesizing that information to draw conclusions. 
+The primary benefits of the SLR method are (1) less chance of missing relevant papers and (2) clear documentation of the process to provide transparency and allow for replication.
+
+\subsection*{A concise description of the infrastructure to be developed, enhanced, or sustained}
+Funded by a CRI Planning Grant (NSF CNS1305395), we performed a literature survey and conducted two
+international community workshops to identify and document the general need for SLR tool support
+infrastructure and the specific set of required features for that infrastructure. 
+We also identified three
+principles to guide the infrastructure development: 
+\textbf{Principle 1: Automate the SLR process}, 
+\textbf{Principle 2: Facilitate collaboration}, and 
+\textbf{Principle 3: Store data to support reuse and evolution}. 
+These principles provide scientific repeatability, improve coverage, reduce individual human labor and errors, and allow for iteration. 
+In addition, our prior work identified specific features that community members found to be important, e.g. support of iteration, support for data interchange between process steps, algorithmic-based article selection, and better support for federated search.
+
+We thoroughly analyzed existing SLR tools to assess their coverage of the key features identified in our
+previous work. 
+We also verified our conclusions by consulting with the SLR tool developers directly. 
+The results of this analysis show that, while some tools do a good job of supporting aspects of the SLR process, there is no tool or framework that supports the entire process and implements all of the features required by the community. 
+Therefore, we propose to build a \textbf{SLR Authoring Infrastructure AI Toolset (SAInT}) to support the entire lifecycle process. 
+To make this infrastructure most useful, we will provide APIs and data interchange facilities that allow existing tools to be plugged-in at appropriate spots and to make use of the data stored within the infrastructure. 
+In addition to providing the infrastructure framework, we also will develop our own tools to support those features that are not well-supported by existing tools.
+
+\subsection*{The CISE Research Focus}
+
+
+% \paragraph{SLR Tool Developers:} 
+% The open nature of the SAIT will allow SLR tool developers to develop, deliver, and integrate state-of-the-art
+% tools. 
+% SAInT's plugin framework will allow various tools to be easily integrated into the overall framework. 
+% This approach will allow SLR tool developers to provide support for the specific SLR steps that will provide the highest quality results with the least amount of author effort. 
+% By providing easy access to intermediate data representations and by allowing researchers to easily plug their tools into the framework, SAInT will promote the development of various SLR support tools and grow the community of SLR tool developers.
+
+% \paragraph{Software Engineers:} 
+% Beyond direct use of SAInT by researchers, it will enable SE researchers to directly influence practice. 
+% An SLR, motivated by an identified or perceived weakness in practice, will extract, evaluate, and synthesize empirical evidence. 
+% Thus, SAInT will facilitate the production of:
+% \begin{itemize}
+%     \item More applied research that is directly commissioned by (and applicable to) practitioners, and
+%     \item More basic research as substantive dialogues generate fundamental questions to be researched.
+% \end{itemize}
+
+% \subsection*{Sample Research Project}
+
+\end{comment}
+
+

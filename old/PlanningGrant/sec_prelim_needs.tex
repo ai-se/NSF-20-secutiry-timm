@@ -1,0 +1,199 @@
+% $Id: sec_prelim_needs.tex 3089 2012-10-23 21:38:10Z nkraft $
+
+As a starting point for planning the infrastructure, we have identified a set of important community needs, which will be iterated upon during the course of the project. The important community needs we identified include, improved support for:
+\vspace*{-4pt}
+\begin{enumerate*}
+	\item{Coordination among multiple (possibly distributed) researchers}
+	\item{Protocol review by the community}
+	\item{Interaction with different literature databases}
+	\begin{enumerate*}
+		\item{Federated search}
+		\item{Search string manipulation and translation}
+		\item{Duplicate result elimination}
+		\item{External citation management tool interoperation}
+	\end{enumerate*}
+	\item{Quality assessment}
+	\item{Data extraction}
+\end{enumerate*}
+\vspace*{-4pt}
+
+Section~\ref{sub:sources} describes the three data sources used to gather these needs. Section~\ref{sub:analysis} provides a detailed analysis of the data sources to illustrate the origing of these community needs.
+
+\subsection{Overview of Data Sources}
+\label{sub:sources}
+
+To gather community needs, we used three data sources: a graduate course by PI Carver (Section~\ref{sub:SLR:course}), a review of published SLRs (Section~\ref{sub:SLR:review}), and a survey of SLR authors (Section~\ref{sub:SLR:survey}).
+
+\subsubsection{PI Carver's SLR Course}
+\label{sub:SLR:course}
+
+In Spring 2012, PI Carver taught a graduate ``Advanced Empirical Software Engineering'' course. There were eight PhD students enrolled in the course (four Computer Science PhD students and four Management Information Systems PhD students). The main focus of this course was for the students to learn about and conduct SLRs. As such, the course had two primary goals:
+\vspace*{-4pt}
+\begin{enumerate*}
+	\item Each student conducted an SLR as a semester-long  project. Realizing that most SLRs cannot be completed within one semester, it was expected that work would continue beyond the semester to make these SLRs publishable. At this point, two of these papers have been accepted in conferences~\cite{Thompson_et_al_2012,Kakar_Carver_2012}, at least five other papers will be submitted to various journals in the near future, including \emph{European Journal of Information Systems} and \emph{Information and Software Technology}, and most of them will become part of the students' dissertations.
+	\item Second, throughout the semester, class time was devoted to discussing each student's SLR and to evaluating the SLR process. Each student wrote a report at the end of the semester describing their SLR process, noting where they had difficulties, and suggesting improvements to the SLR process.
+\end{enumerate*}
+\vspace*{-4pt}
+
+In addition, each student acted as a second reader for the SLR of one of their classmates. PI Carver oversaw all SLRs, provided input on the protocols and helped to resolve any conflicts during the paper selection/data extraction process. Due to the effort required to conduct these reviews, it was not possible for every paper to be reviewed by two reviewers. So, at each elimination stage of the SLR process (i.e. title elimination, abstract elimination and full paper elimination), the second reader reviewed a random subset of 10-20\% of the excluded papers to ensure that the primary author was not prematurely excluding papers that could be relevant. When the primary author reached the data extraction stage, the second reader reviewed the full data extraction for a subset of the papers.
+
+In addition to the interaction among the primary author and the second reader throughout the semester, a large portion of the class meeting time was devoted to discussing each SLR. Each student had the opportunity to present his protocol and received feedback from his classmates. The class also spent a substantial amount of time discussing the logistics of the SLR process and identifying common problems encountered by multiple students. By the end of the course each student produced two deliverables:
+\vspace*{-4pt}
+\begin{enumerate*}
+\item An initial version of the SLR, which in most cases needed further revision to become publication-ready; and
+\item A report describing his experiences with following the standard SLR process, including specific areas in which he encountered difficulties. It is these reports that provided the bulk of the information described Section~\ref{sub:analysis}.
+\end{enumerate*}
+\vspace*{-4pt}
+
+\subsubsection{SLR Literature Review}
+\label{sub:SLR:review}
+
+For the second source of data, we performed a thorough literature search and identified 214 published SLRs. We analyzed those SLR papers to identify strengths and weaknesses in the current SLR process, including areas in which tool support could be helpful. During the review of these papers, we used the following data extraction process:
+\vspace*{-4pt}
+\begin{enumerate*}
+\item Determine whether the SLR protocol was explicitly described
+\item Review the description of the protocol to:
+\vspace*{-4pt}
+   \begin{enumerate*}
+	\item Note databases used and the search strategy for those databases
+	\item Note any deviations from Kitchenham's process (whether stated explicitly or not)
+	\item Note any tools used
+	\item Note any difficulties described about the process
+   \end{enumerate*}
+\vspace*{-4pt}
+\item Look for a ``lessons learned'' section to get more details
+\item Note anything else particularly interesting about the SLR process in the paper
+\end{enumerate*}
+\vspace*{-4pt}
+The information extracted from this analysis is included in Section~\ref{sub:analysis},
+and the list of 214 published SLRs is included among the cited references at the end of this proposal.
+
+\subsubsection{Survey of SLR Authors}
+\label{sub:SLR:survey}
+
+Finally, to obtain more detailed insight into the SLR process, we developed a list of SLR authors from the list of published SLRs identified in Section~\ref{sub:SLR:review}. We sent a survey to all of those authors that asked them to detail: the SLR process followed, where they had difficulties in the SLR process, where they spent their time during the SLR process, and which aspects of the SLR process were most in need of tool support. The results of the 50+ survey responses are included in the discussion in Section~\ref{sub:analysis}.
+
+\subsection{Analysis of SLR Process}
+\label{sub:analysis}
+
+This section uses data gathered from the three data sources described in Section~\ref{sub:sources} to analyze the steps in the SLR process. The goal of the analysis is to identify aspects of the SLR process that SLR authors found particularly difficult, highlighting community needs for tool support of the SLR process. This section is organized around the major phases of the SLR process: Section~\ref{sub:proto:plan} discusses general issues regarding Protocol Planning and Section~\ref{sub:proto:items} focuses on specific protocol items. For the sake of continuity, we discuss data from all three data sources together under each heading. As we discuss each phase of the SLR process, we specify the identified community needs.
+
+
+\subsubsection{Protocol Planning}
+\label{sub:proto:plan}
+
+This section describes general information pertaining to protocol development. Information about detailed protocol items appears in Section~\ref{sub:proto:items}. During PI Carver's course, the students' stated that the frequent discussion of their protocols with each other and with PI Carver helped in the development and refinement of the protocols. The students also found it helpful for their SLR process to be guided by PI Carver, who is experienced in conducting SLRs. These experiences are not unique to PI Carver's course. Our review of the SLR literature suggests that many SLRs are performed by students as part of their thesis work. Guidance from a more experienced researcher/reviewer is crucial to the accuracy and success of the review~\cite{EMendes_2005}. The community needs identified in this phase are:
+\vspace*{-4pt}
+\begin{itemize*}
+\begin{bfseries}
+\item Protocols may have to be revised and edited during the SLR process
+\item Protocols need to be socialized among peers for review and feedback
+\item Novice researchers need the ability to interact with a more experienced research during the planning and execution of the SLR
+\end{bfseries}
+\end{itemize*}
+\vspace*{-4pt}
+
+\subsubsection{Protocol Items}
+\label{sub:proto:items}
+
+This subsection describes the results obtained for protocol items P2-P6.
+
+\paragraph{P2. Research Questions}
+
+The research question(s) are arguably the most important aspect of the protocol because they drive the remainder of the protocol. Based on the experiences in PI Carver's course, it is clear that the research question(s) have to be appropriately scoped. If they are too broad, they will generate too many papers to reasonably evaluate in one SLR. Conversely, if they are too narrow, they will not generate enough papers to draw useful conclusions. Scoping of the research question(s) is an activity in which feedback from more experienced researchers could be quite beneficial. The community need identified in this section is:
+\vspace*{-4pt}
+\begin{itemize*}
+\begin{bfseries}
+\item Research question(s) must be properly scoped
+\item Expert feedback is beneficial to formulating appropriate research question(s)
+\end{bfseries}
+\end{itemize*}
+\vspace*{-4pt}
+
+\paragraph{P3. Search Strategy}
+
+The search strategy includes database selection and creation of one or more search string(s) from the research question(s). Creating the search string(s) can be an iterative process as the researcher attempts to define the appropriate set of keywords and synonyms that cover the research space. This section first discusses issues with the databases and then issues with the search strings.
+
+Regarding databases, SLR researchers typically search multiple databases, which may have different functionality. Based on the experiences in PI Carver's course, we can make the following observations regarding the databases. First, databases have different behavior regarding the search strings. For example, in some cases changing the order of the keywords changes the result set. In other cases, Boolean logic does not work as expected. As a result, researchers must develop a different set of search strings for each database. Second, the advanced search functionality differs across databases. In some cases, the advanced search interface returns different results than the basic search interface, even if the same search string is used. Third, there is a large overlap in the literature covered by the databases commonly used for SLRs, creating the need to identify and remove duplicate studies from the result set. Fourth, databases differ in the content and format of the citation information provided. Finally, the databases are not consistent in their behavior regarding bulk export of references to a citation manager.
+
+Similar problems with the peculiarities of the databases were also reported by the papers in our literature review (e.g., \cite{LChen_et_al_2009,EladioDomınguez_et_al_2012,MuhammadSarmadAli_et_al_2010,LianpingChen_et_al_2011,SoniaMontagud_et_al_2012,MehwishRiaz_et_al_2009,IvoneiFreitasdaSilva_et_al_2011,EMendes_2005}). A relatively small number of researchers used EndNote to facilitate the removal of duplicate papers (e.g., \cite{LianpingChen_et_al_2011}) while most performed the task manually.
+
+Regarding the search strings in general (i.e. not including differences among databases), the experiences in PI Carver's course resulted in the following observations. First, adding a '*' at the end of a key term helps to identify variant spellings. Second, when using a common term like ``Open Source,'' restrict the search to the title, abstract and keywords to limit the number of irrelevant hits. Third, in some cases a large number of relevant papers were not returned by the initial search, causing the search string to be refined based upon the results of a secondary search, i.e. reviewing references in the identified papers.
+
+This information suggests the following community needs:
+\vspace*{-4pt}
+
+\begin{itemize*}
+\begin{bfseries}
+\item The ability to search multiple databases in one tool
+\item Automatic (or semi-automatic) manipulation of search string to accommodate peculiarities of various databases
+\item Automatic elimination of duplicate results
+\item The ability to export all citations in a common format (i.e. BibTex or EndNote)
+\end{bfseries}
+\end{itemize*}
+\vspace*{-4pt}
+
+\paragraph{P4. Identification of Primary Studies}
+
+Once the search results are identified, the next step is to determine which papers should be included in the SLR. There are two aspects to this process: the definition of the inclusion/exclusion criteria and the process of actually determining which papers belong in the review. The SLR author survey indicated that selecting appropriate papers was the third most difficult and second most time consuming aspect of the SLR process. It was also the aspect second most in need of tool support.
+
+PI Carver's course resulted in the following observations about the inclusion/exclusion criteria: 1) there is a need to ensure that it conforms to the goals of the current review rather than just being reused from other SLRs; 2) there is a need for expert review; 3) it should be as specific as possible; and 4) it may have to be reviewed and edited during the search process. 
+
+PI Carver's course also resulted in the following observations about the paper selection process: 1) review of the titles and abstracts may not be sufficient for eliminating papers; 2) there is a need for a citation manager to keep track of the references; 3) have to manually examine or write a script to handle duplicate results across databases; 4) when searching for specific terms or content that may not be evident in the title/abstract/keywords, the addition of a quick scan of the full text of the paper may be useful for quickly eliminating irrelevant papers; 5) this step was very time consuming, especially having multiple reviews of papers; and 6) it is difficult to coordinate meeting times. 
+
+The literature review showed that other authors reported the same or similar problems. For example, some researchers noted the difficulty of duplicate removal~\cite{DIKSjoeberg_et_al_2005}. Researchers used various tools for managing the papers: a ``citation manager,''~\cite{MuhammadSarmadAli_et_al_2010} or EndNote~\cite{SusanMMitchell_et_al_2009,LianpingChen_et_al_2011,HongyuPeiBreivold_et_al_2010}.
+
+\vspace*{-4pt}
+This information suggests the following community needs:
+\begin{itemize*}
+\begin{bfseries}
+\item There is a need for expert review of inclusion/exclusion criteria
+\item The citations need to be managed within the tool
+\item The tool needs to interoperate with external citation management tools (e.g., BibTeX, EndNote)
+\item There is a need to automate the elimination of duplicate papers
+\item There is a need for management of the review process among the SLR team
+\end{bfseries}
+\end{itemize*}
+\vspace*{-4pt}
+
+
+\paragraph{P5. Quality Assessment}
+
+Once a set of candidate primary studies has been identified, the next step is to perform a quality assessment to determine whether any should be excluded due to the unreliability of their results. The results of the SLR author survey showed that quality assessment was the second most difficult and third most time consuming aspect of the SLR process.
+
+The experiences from PI Carver's course resulted in the following observations. First, the quality assessment checklist should be part of the data extraction form. Second, the quality criteria must be relevant to the specific topic and not just reused from a prior SLR. Third, the researcher must ensure that the quality assessment criteria will actually differentiate between papers of different quality. Finally, the quality assessment should be performed by at least two researchers to avoid bias. These observations suggest the following community needs:
+
+\vspace*{-4pt}
+\begin{itemize*}
+\begin{bfseries}
+\item There is a need for a mechanism to build appropriate quality assessment criteria
+\item There is a need to facilitate multiple authors performing quality assessments independently
+\end{bfseries}
+\end{itemize*}
+\vspace*{-4pt}
+
+\paragraph{P6. Data Extraction}
+
+
+Once the authors have arrived at a final set of papers that are to be included in the SLR, the next step data extraction. The results of the SLR author survey showed that extracting data from papers was the most difficult and most time consuming aspect of the SLR process. It was also the aspect that was the third most in need of tool support.
+
+The experiences in PI Carver's course resulted in the following observations about the data extraction process. First, the data extraction form needs to be reviewed by an expert in SLRs and an expert in the domain of the review. Second, realize that the form may need to be refined throughout the process as the authors better understand the papers. Third, the extracted information needs to be reviewed by collaborators to eliminate any bias. Finally, there is a need for a tool that allows the extracted data to be easily recorded and analyzed across multiple papers. In our literature review, most researchers did not report the use of a tool for data extraction. We did find a few researchers using EndNote (e.g., \cite{CarlaPacheco_et_al_2012,LEfrizoni_et_al_2010,HongyuPeiBreivold_et_al_2012}) or a spreadsheet (e.g., \cite{LianpingChen_et_al_2011,HongyuPeiBreivold_et_al_2012,ShaukatAli_et_al_2010,SamirehJalali_et_al_2010}) to manage the data extraction process. These observations suggest the following community needs:
+\begin{itemize*}
+\begin{bfseries}
+\item There is a need to facilitate expert review of the data extraction form
+\item There is a need to support multiple authors extracting and reviewing data
+\item There is a need to ease the recording and analysis of the extracted data
+\end{bfseries}
+\end{itemize*}
+
+
+\subsection{Existing SLR tools}
+Section~\ref{sub:existing:tools} described three tools that support various aspects of the SLR process. While RevMan / Archie does include desirable features, it is primarily designed for documenting and maintaining individual medical studies under the auspices of the Cochrane Collaboration. StaRt and SLuRp have a similar focus to our proposed infrastructure. This section briefly analyzes the StArt and SLuRp tools with regards to their match to the identified community needs.
+
+StArt enforces a rigid interpretation of the SLR process. It requires the user to enter elements of the protocol, which are later used to mandate additional inputs before the user may proceed with conducting the review. While true to the original definition of the SLR protocol, this tool lacks the ability to support the iterative nature of the SLR process. As a result, evolution of the protocol during review process is cumbersome. In addition, StArt is designed to be a desktop application that supports a single user, thus, neglecting the collaborative nature of the SLR process.
+
+SLuRp is web-based and allows multiple researchers to collaborate on the same SLR. However, it does not aid in the development of the search string.  While it does record the researchers' ratings about primary study selection and quality assessment, it does not support the resolution of disagreements among researchers. SLuRp does record bibliographic data for studies imported into the tool, but removal of duplicates and merging of conflicting entries is still a manual process. Finally, SLuRP lacks facilities to export bibliographic and other extracted data into commonly accepted formats for importation into specialized tools, such as EndNote or statistical packages.
+
+Some other observations about these two tools highlight the need for the creation of a new infrastructure. Both follow a strict interpretation of the SLR process and do not fully support the inclusion, and use, of techniques such as snowballing to recover relevant studies that may have been missed due to the nature of database searches. StaRt does allow these techniques to be used during the piloting phase, but they cannot be included as a formal part of the review. Additionally, neither tool facilitates ongoing maintenance of reviews or the ability for researchers to build upon previous work. Prior search results, quality assessments and extracted data are not readily available for use in the updating of existing reviews or the construction of new reviews. 
+
+% vim:syntax=tex

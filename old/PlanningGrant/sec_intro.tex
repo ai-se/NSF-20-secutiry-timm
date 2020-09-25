@@ -1,0 +1,54 @@
+% $Id: sec_intro.tex 3089 2012-10-23 21:38:10Z nkraft $
+
+The review of existing literature is the foundation of all new research. In SE, these reviews have traditionally been performed in an \emph{ad hoc} manner. To provide some structure to the literature review process, medical researchers defined the SLR process. While SLRs have been commonplace in medicine, they are a recent phenomenon in SE largely due to significant barriers that inhibit their wider adoption, e.g., the process is labor intensive and tool support is lacking. The goal of the proposed infrastructure is to lower the barrier for researchers who want to perform SLRs. The proposed infrastructure will also provide researchers with a platform for community interaction and data dissemination. We expect that the infrastructure will increase not only the quantity, but also, more importantly, the quality of SLRs and SE research in general. %We also expect the proposed infrastructure to foster industry adoption. [[Do we need last sentence??]]
+
+The initial step of a new research endeavor is a review of previous work to properly ground the new research. The most common method of examining previous work is via literature review. A literature review can also have other goals, such as, summarizing the current state of knowledge about an area as a service to the community. Regardless of the goal of the literature review, a researcher can perform the review in the traditional, unsystematic, fashion, that is, by conducting database searches and following references or the researcher can use a more systematic method. 
+
+An SLR is a formal, repeatable method by which a researcher can identify, evaluate, and interpret the available research about a question or topic area. The primary difference between an SLR and and \emph{ad hoc} review is the level of advanced planning in an SLR. Prior to conducting the review, the researchers develop a protocol that documents: the research question(s) to guide the review, the search strategy (including specific databases and keywords), the criteria for choosing appropriate papers, a quality assessment method for the papers, the specific information to be extracted from each paper, and a plan for synthesizing the information from the set of papers to draw a conclusion. By using this systematic process, researchers are much less likely to accidentally omit important papers from the literature review.
+
+Medical researchers, practitioners, and policy makers have long relied on SLRs, because they integrate up-to-date, reliable, and critical information that support important decisions. Seeking these same benefits, the SE community has recently begun publishing SLRs. Indeed, with the growing emphasis on empirical research in SE, SLRs are of critical importance because they allow researchers to bring together disparate evidence to understand the effects of various SE tools, techniques and methods. Unfortunately, though production and dissemination of SLRs is key to the maturation of SE and to the adoption of SE research practices by industry, conducting an SLR is a difficult and time-consuming process. Based on our own SLR experiences, a review of over 200 SLRs, and a survey of over 50 SLR authors, we have identified four key barriers to wider adoption. Section 2 discusses each of these barriers in more detail.
+
+First, the process of systematically identifying relevant papers is largely manual and thus very labor intensive. This process is more difficult when research topics cross traditional disciplinary boundaries, as many interesting topics increasingly do. While some advancement has been made in database functionality, as a discipline, we still lack adequate tools to assist in the extraction and compilation of relevant information from existing research. Using most common search engines for SE literature (i.e., IEEExplore, ACM, or Google Scholar), a search may yield thousands of results, of which a large percentage may be irrelevant for various reasons (i.e., overloaded terminology or simply contain the right word combinations by chance). In addition, because databases are not mutually-exclusive, the result set will likely contain duplicates, which must be manually parsed by the researchers.
+
+Second, there is little tool support for collaborative SLRs. After identifying the relevant set of articles, multiple researchers must extract important information from each paper and compare the results for consistency. Again, this step is typically performed manually. There is no tool support to ease this process and to aid in the inter-rater reliability assessment necessary to evaluate the accuracy of the extracted information.
+
+Third, there is no mechanism to store the data extracted from papers so that it can be updated and reused. It is quite likely that the same paper may be relevant to multiple SLRs. While the data extracted from a paper may differ somewhat depending on the research questions, there will likely be a lot of common data items. Because there is no central repository for storage of extracted data, researchers must fully repeat this extraction process for each new SLR. Such a repository would not only reduce effort by enabling a researcher to extract only the additional data relevant to the new research question(s), but also facilitate collaboration by allowing researchers to identify others working on similar topics.
+
+Finally, there is  no mechanism to enable SLRs to evolve over time. Ideally, an SLR should be a ``living'' document that could evolve as new research results become available. Because current publications are static, appropriate infrastructure is needed to support the evolution of SLR results by allowing researchers to easily create new versions or fork off related topics. Making SLRs living documents that incorporate the latest research results will allow them to be more useful both to researchers and practitioners.
+
+To address these barriers and to provide a platform to encourage more researchers to conduct SLRs, there is a need for new infrastructure. The goal of this planning grant is to build upon our initial experiences to develop a complete picture of the community needs for this infrastructure. By interacting with the community SLR authors, we will clarify the set of problems for which infrastructure is particularly needed. In addition, we will also interact with the community to ensure that by the end of the planning grant we have a concrete proposal for the implementation of the infrastructure that the community will find useful and beneficial.
+
+\paragraph{Intellectual Merit}
+
+Literature reviews are an integral part of any new research activity. As such, it is critical that researchers are able to identify as complete a set of related literature as possible. This project will produce a plan to develop and deploy such infrastructure. Specifically, the resulting infrastructure will facilitate current and future research %in the following ways:
+in that it will:
+\vspace*{-4pt}
+\begin{itemize*}
+%\item It will enable researchers to more easily perform SLRs by reducing the manual effort required and improving the accuracy of the result
+\item Enable researchers to perform SLRs more easily by reducing the manual effort required and by improving the accuracy of the result
+%\item It will serve as a repository of all related literature about a research topic that can be kept current through addition of newly published articles
+\item Serve as a repository of all related literature about a research topic that can be kept current through the addition of newly published articles
+%\item It will aid additional research by providing a repository of peer-reviewed data extraction sheets to the research community for exploration and use in meta-analysis
+\item Foster additional research by providing a repository of peer-reviewed data extraction sheets to the research community for exploration and use in meta-analysis
+%\item It will serve as a community hub to facilitate geographically dispersed collaboration efforts and to enable social networking regarding the results of SLRs
+\item Serve as a community hub to facilitate geographically distributed collaborations and to enable social networking regarding the results of SLRs
+\end{itemize*}
+\vspace*{-4pt}
+
+\paragraph{Broader Impacts}
+
+By lowering the barriers to performing SLRs and enabling more SLRs to be produced, the proposed infrastructure will: %have the following broader impacts:
+\vspace*{-4pt}
+\begin{itemize*}
+\item Enable a larger portion of the SE community, especially new researchers, to conduct SLRs
+\item Increase the prevalence of summarized results that can inform research and practice
+\item Make the results of a review to be accessible to a larger audience
+
+\end{itemize*}
+\vspace*{-4pt}
+
+In addition, because SLRs are often publishable in their own right, and because all PhD students must perform some type of literature review as part of their work, the proposed infrastructure will enable PhD students to obtain an additional publication in the course of their work.
+
+The proposal is organized as follows. The remainder of Part I provides background on SLRs and existing tools. Part II describes our preliminary work to identify community needs with regards to infrastructure requirements (Section~\ref{sec:prelim:needs}) and proposed solutions (Section~\ref{sec:prelim:tools}). Part III details the work we plan to conduct as part of this planning project to validate the information in Part II. Part IV lays out the plan for completing the proposed work. Finally Part V describes the qualifications of the investigators.
+
+% vim:syntax=tex

@@ -1,0 +1,35 @@
+
+\begin{table}[!t]
+\caption{A Sample of Test Case Prioritization {\bf Strategies}.
+}
+\label{tbl:algorithms}
+\resizebox{\textwidth}{!}{
+\small
+\setlength\tabcolsep{5pt}
+\begin{tabular}{cl|ccc|}
+\multicolumn{2}{c|}{~}                & \multicolumn{3}{c|}{\textbf{Utilized Information}}\\ 
+\multicolumn{2}{c|}{~}      & Execution      & Test case        &         \\ 
+
+\textbf{ID}     & \textbf{Algorithm Description}       &  history     &   description       & Feedback       \\ \hline
+\rowcolor{blue!10} A1 & Regression testing in random order. & & &  \\ 
+\rowcolor{blue!10}  A2 & Regression testing in optimal order. & & &  \\  
+B1 & Cost-based algorithm~\cite{cost-based}: ascending order of estimated test case runtime. & \checkmark & &  \\ 
+B2 & GoogleTCP~\cite{google}: run new tests first, then others
+sorted up on time since last failure. & \checkmark & &  \\ 
+B3 & Risk-driven clustering~\cite{38}: run tests in ascending order of time since last failure, run new tests  last. & \checkmark & &  \\ 
+B4 & Descending order of number of times failed/number of times executed. & \checkmark & &  \\ 
+B5 & Q-learning like metrics~\cite{97}: descending order of Q-learning   metrics. & \checkmark & &  \\ 
+B6 & ROCKET~\cite{182}: Descending order of 
+the ROCKET metrics. & \checkmark & &  \\  
+\rowcolor{blue!10} C1 & Supervised learning with Simple History (SH)~\cite{59}. & \checkmark & \checkmark &  \\ 
+\rowcolor{blue!10} C2 & Supervised learning with All History (AH)~\cite{59}. & \checkmark & \checkmark &  \\ 
+\rowcolor{blue!10}  C3 & Supervised learning with Weighted History (WH)~\cite{59}. & \checkmark & \checkmark &  \\ 
+D1 & Dynamic test case prioritization with co-failure information~\cite{183}. & \checkmark &  & \checkmark \\ 
+D2 & AFSAC: dynamic test case prioritization with flipping history~\cite{103}. & \checkmark &  & \checkmark \\ 
+D3 & REMAP: dynamic test case prioritization with rules mined from failure history~\cite{132}. & \checkmark &  & \checkmark \\ 
+D4 & Dynamic test case prioritization based on distances between test case descriptions~\cite{158}. & \checkmark & \checkmark & \checkmark \\  
+\rowcolor{blue!10} E1 & Active learning : use feedback from test $i$ to incrementally update an SVM~\cite{Yu:2018}. &  & \checkmark & \checkmark \\ 
+\rowcolor{blue!10} E2 & Active learning utilizing both test case description and history information & \checkmark & \checkmark & \checkmark 
+\end{tabular}}
+\end{table}
+

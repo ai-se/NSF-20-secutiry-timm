@@ -1,0 +1,151 @@
+\textbf{NSF CNS-1305395} (PI: Carver, Co-PI: Hale), (10/1/13-9/30/15), \$100,000 Title: \emph{CI-P: Advanced Systematic Literature Review Infrastructure for Software Engineering}. 
+This section details the results of the work funded by the planning grant and serves as background and preparation for this CI-NEW proposal.
+\textit{Intellectual Merit:} This work provided the information necessary to develop a plan for building an infrastructure to support SLRs, which are an integral part of the research process.
+\textit{Broader Impacts:} The development of such an infrastructure will lower the barriers and increase the quality and quantity of SLRs produced by the SE community resulting in more widespread dissemination of research results.
+This project has supported the work of two PhD students, one of which has completed his degree, and has produced two conference papers~\cite{Carver-etal:13, Hassler-etal:14} and a journal paper\cite{Hassler-etal:16}, with another journal paper in preparation.
+
+\subsection{Results of Community Survey}
+In preparation for the Community Workshops described in the following sections, we surveyed published SLR authors to understand their SLR process, the difficulties they encountered, and the areas most in need of tool support.
+Based on the 59 responses we identified four primary areas in need of infrastructure support~\cite{Carver-etal:13}:
+\vspace{-8pt}
+\begin{itemize}
+	\item Systematically identifying relevant papers from the literature;
+	\vspace{-4pt}
+	\item Conducting collaborative SLRs;
+	\vspace{-4pt}
+	\item Storage of extracted data from papers; and
+	\vspace{-4pt}
+	\item Evolution of SLRs over time.
+\end{itemize}
+
+\subsection{Overview of Community Workshops}
+\label{sec:overview:workshops}
+The primary goal of the CI-P proposal was to plan for the construction of an infrastructure to support the SLR process. 
+The primary objectives of the CI-P proposal were to:
+\vspace{-8pt}
+\begin{itemize}
+	\item Iterate on the needs and proposed infrastructure identified in our preliminary work; and
+	\vspace{-4pt}
+	\item Create a plan for the development and deployment of the infrastructure.
+\end{itemize}
+\vspace{-4pt}
+
+With this goal and supporting objectives as a guiding vision, we conducted two community workshops.
+The first workshop, held concurrently with the 2013 Empirical Software Engineering International Week (ESEIW), focused on identifying and ranking barriers to the execution of the SLR process.  
+The second workshop, held in conjunction with the 18th International Conference on Evaluation and Assessment in Software Engineering (EASE), validated the results of the first workshop and served primarily to identify and rank the requirements for an SLR infrastructure.
+The workshop participants were all researchers actively engaged in the production of SLRs in the SE domain.  
+The 30 attendees represented a globally diverse slice of the community with representatives from North America, South America, and Europe.  
+Only one individual outside of the research team participated in both workshops. 
+
+Utilizing a nominal group technique~\cite{Delbecq-etal:75,Lethbridge-etal:00}, the ESEIW workshop participants generated over 200 individual ideas, which they consolidated into 45 composite barriers in the SLR process. 
+Independently, the EASE workshop participants identified 28 composite barriers (21 matched barriers from the ESEIW workshop and 7 new ones focused on tool features).
+These results form the basis of the requirements for SAInT listed in Section~\ref{sec:results:workshops}.
+
+%\note{Should we move this paragraph to the next section since it really talks about results?}
+%Based on the results of the workshops, it is clear that the key issues in the SLR process can be grouped into three categories.
+%First, the \textbf{planning} process outlined by Kitchenham et al~\cite{Kitchenham:04, Kitchenham_Charters:07} focuses primarily upon the creation of the SLR protocol.
+%The workshop attendees indicated that the planning must go well beyond the protocol to include project management concepts like resource allocation, scheduling, standards and work breakdown structures).
+%Second, the workshop participants emphasized the need for \textbf{collaboration} across and between the SLR steps.
+%Finally, one of the key issues raised by workshop participants was \textbf{data interchange and tool interoperability}.
+%Currently, this process still requires a large amount of manual labor to transform the data into compatible formats.
+%This mismatch among tools is true not only for bibliographic metadata, but also for data extracted for analysis, as well as the results of researchers' collaborative efforts (inter-rater agreements, dispute resolutions, etc.).
+
+%\note{Could we delete this paragraph to save space?}
+%A number of the ideas reveal desired features for tools that in previous research were not noted as barriers.  
+%These items indicate possible improvements in the workflow of researchers conducting a SLR. 
+%These results also indicate that the workshop process captured not only the barriers in the SLR process, but also features that the community is requesting be included in the tool.
+
+\subsection{Output of Community Workshops -- Requirements for Infrastructure}
+\label{sec:results:workshops}
+Using the results of the surveys and workshops, we were able to identify a number of detailed requirements for an SLR infrastructure.
+Further analysis of those requirements led us to abstract the four guiding principles enumerated in Section~\ref{sec:intro}.
+We then abstracted the following high-level requirements, grouped by the four guiding principles, from the detailed requirements.
+
+\vspace{-8pt}
+\begin{itemize} 
+\item \textbf{Principle 1: Automate the SLR process to reduce manual labor and allow for iteration}
+	\begin{enumerate}
+		\item Support task automation -- substitute algorithmic and computer cycles for human work
+		\vspace{-4pt}
+		\item Support automated guidance (phase protocol execution support)
+		\vspace{-4pt}
+		\item Support iteration within and among SLR Phases
+	\end{enumerate}
+\item \textbf{Principle 2: Facilitate collaboration }
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\vspace{-4pt}
+		\item Support project collaboration and coordination of work teams
+		\vspace{-4pt}	
+		\begin{enumerate}
+			\item comprised of multiple researchers,
+			\item geographically dispersed, and
+			\item working asynchronously
+			\end{enumerate}
+		\item Support monitoring of progress and quality
+		\vspace{-4pt}
+		\item Support revised planning
+	\end{enumerate}
+\item \textbf{Principle 3: Store data to support reuse and evolution}
+	\begin{enumerate}
+		\setcounter{enumi}{6}
+		\vspace{-4pt}
+		\item Support future extensions through persistence of SLR templates and data
+		\vspace{-4pt}
+		\item Support data interchange across all SLR phases
+	\end{enumerate}
+\item \textbf{Principle 4: Provide an open architecture with extensible design}
+	\begin{enumerate}
+		\setcounter{enumi}{8}		
+		\vspace{-4pt}
+		\item Support existing and future tools through workflow integration and data interchange
+		\vspace{-4pt}
+		\item Support an open architecture
+	\end{enumerate}
+\end{itemize}
+\vspace{-4pt}
+
+\subsection{Existing Tools}
+\label{sub:existing:tools}
+
+SLRs still suffer from a lack of complete tool support for all the requirements identified in Section~\ref{sec:results:workshops}.
+According to a recent mapping study~\cite{Marshall-Brereton:13}, 11 SLR-related tools are described in the SE literature. 
+Most of these tools (7 of 11) target the selection of studies to include in the review~\cite{MS:11,MS:13,MS:14,MS:21,MS:22}, the extraction of data~\cite{MS:12,MS:18,MS:21}, or the synthesis of data~\cite{MS:12,MS:16,MS:17,MS:20}.
+Three of the other tools~\cite{MS:15,MS:19,MS:23} target the entire SLR process.
+The remaining tool~\cite{MS:24} targets the identification of candidate studies.
+Unfortunately, most of the tools identified by the mapping study~\cite{Marshall-Brereton:13} are either in early stages of development or are not freely available.
+Furthermore, only two of those tools~\cite{MS:18,MS:23} have been evaluated independently~\cite{Marshall-Brereton:13}.
+
+In some cases, existing tools may fulfill a portion of the requirements -- or may only provide insight into what users consider inadequate.  
+An example of inadequate tooling can be seen in the selection process; current tools are not significantly reducing the amount of time utilized during this process step.  
+A recent study reports taking over 400 hours to complete the selection process~\cite{Hassler:14}. 
+This same study reports taking 4 man-hours to review the quality of results that took seconds of computer time using an automated technique.
+
+Starting from the list in the mapping study~\cite{Marshall-Brereton:13}, we selected the three tools that were specifically focused on SLRs, targeted multiple phases of the SLR process, and were freely available (SLuRP, StART, and SLR-Tool).
+We also identified two additional tools not covered in the mapping study (SLRTOOL and Parsifal).
+(Note that we excluded ReVis and PEx from our evaluation because there are designed to support single phases of the SLR process. However, we will include those tools in our construction of SAInT, where appropriate.)
+Using information from the literature and our own evaluation of the tools, we documented each tool's features and limitations.%~\cite{Al-Zubidy-Carver:14}.
+Based on the detailed results of the Community Workshops, we analyzed each tool's features to determine whether they covered any or all of the desired features.
+We iterated the results of our analysis with each tool's authors to ensure we had accurately characterized them.
+Table~\ref{table-tools} summarizes our findings and shows that none of the tools fully support the requirements for the entire SLR process.
+In our own analysis and use of the tools we found interoperability issues among the tools and that the tools required researchers to spend a large amount of effort in data preparation and searching required manual effort.
+
+
+\begin{table}
+	\centering
+	\caption{Tools - \ding{51} = fully covered; \ding{119} = partially covered; \ding{109} = not covered}
+	\input{table-tools}
+	\label{table-tools}
+\end{table}
+
+The medical community uses two tools to support SLRs.
+Neither tool provides much support for the planning or execution phases of the SLR process.
+RevMan~\cite{RevMan} focuses primarily on the documentation phase of SLRs performed under the guidelines of the Cochrane Collaboration. 
+It facilitates the preparation of formatted tables and version tracking. 
+Archie~\cite{Archie} is the central repository for RevMan and is used to store completed reviews. 
+Review of the medical literature and interaction with an MD who participate in our first workshop showed that the medical community faces many of the same problems faced by the SE community.
+Many of these barriers relate to the difficulties faced during searching~\cite{Bouamrane-etal:11, Frunza-etal:10, Young-Ward:01, Zwolsman-etal:13, Zwolsman-etal:12, Lai-etal:10}.
+
+Based on our findings, there is no tool, or combination of tools, that provides a comprehensive set of features which overcome the barriers and meet the requirements identified by the community.  
+\textbf{Thus, SAInT is needed to support the entire process (as a whole), connect all the phases, allow for iteration in the process, provide the flexibility to work with other tools at any phase of the process, and support data interchange among the phases.}
+

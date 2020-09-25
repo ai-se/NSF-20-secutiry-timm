@@ -1,0 +1,46 @@
+% $Id: sec_process.tex 3089 2012-10-23 21:38:10Z nkraft $
+
+Kitchenham ported the SLR process from the medical field to SE. The process, as prescribed by Kitchenham~\cite{Kitchenham:04,Kitchenham_Charters:07}, consists of three primary phases: review planning, review execution, and review documentation.
+
+During the \textbf{planning phase}, the researcher defines a protocol that guides SLR execution. The goal of the protocol is to reduce researcher bias and provide a repeatable, transparent process for conducting the SLR. The protocol should contain, at a minimum, the following information:
+\begin{enumerate*}
+	\item[P1.]{Motivation for conducting the SLR}
+	\item[P2.]{Research question(s)}
+	\item[P3.]{Search strategy - including databases to be searched and search string(s)}
+	\item[P4.]{Strategy for identifying primary studies (i.e. inclusion and exclusion criteria)}
+	\item[P5.]{Quality assessment criteria}
+	\item[P6.]{Data extraction form}
+\end{enumerate*}
+\vspace*{-8pt}
+
+An independent expert or panel reviews the protocol for completeness and validity. If at any point during the SLR execution the researchers must change the protocol, the expert or panel should re-review the revised protocol.
+
+During the \textbf{execution phase}, researchers proceed through five steps:
+\begin{enumerate*}
+	\item[E1.]{Identify relevant research by executing the defined search strategy}
+	\item[E2.]{Select primary studies by applying the inclusion and exclusion criteria}
+	\item[E3.]{Assess study quality using the quality assessment criteria}
+	\item[E4.]{Extract required data into data extraction forms}
+	\item[E5.]{Synthesize data to draw conclusions}
+\end{enumerate*}
+\vspace*{-8pt}
+
+Researchers apply the search terms to multiple databases. Then the researcher(s) use the inclusion and exclusion criteria to reduce the results of the search process, using titles first, then abstracts, then full text. During each iteration, the researcher(s) eliminate prospective studies only when it is clear that the study is not relevant. After selecting the primary studies, the researchers perform a quality assessment of each selected study. The studies are then weighted based upon the results of the quality assessment. Finally, the researchers extract important data from all included studies. The resulting data set then forms the basis for the data synthesis. To reduce researcher bias in the process, members of the research team perform each step independently and then meet to review the results and resolve any conflicts. 
+
+Lastly, during the \textbf{documentation phase} the researchers use all of the information described in the protocol, along with the results of the execution of the protocol to document the review in some type of publication. This phase consists of the following steps:
+\vspace*{-4pt}
+\begin{enumerate*}
+	\item[D1.]{Specify dissemination strategy}
+	\item[D2.]{Format SLR report}
+\end{enumerate*}
+\vspace*{-4pt}
+
+\subsection{Existing tools}
+\label{sub:existing:tools}
+The SLR process originated with the The Cochrane Collaboration, the primary organization that organizes and disseminates SLRs in medicine. With the long history of SLRs, we expected to find some sophisticated suport tools. We did locate one toolset, the RevMan/Archie combination utilized by the Cochrane Collaboration~\cite{RevMan:11}. RevMan focuses primary on the documentation phase of SLRs performed under the guidelines of the Cochrane Collaboration.  RevMan includes facilities for the preparation of formatted tables used in the reviews and for tracking the revisions of a review over time.  Archie is the central repository, or backend for the RevMan application and is used to store completed reviews. Neither tool appears to provide much functionality to support the planning or execution phases of the SLR process.
+
+With the increasing prevalence of SLRs in SE, we were surprised to find only two tools that support the SLR process within SE. First, StArt~\cite{Fabbri_et_al_2012} is a desktop based application design to assist an individual researcher in designing and conducting an SLR that follows the process originally described by Kitchenham~\cite{Kitchenham:04}. To use StArt, a researcher inputs protocol elements, including: research questions, databases, and study selection criteria. These elements then become attributes of the steps in the execution phase of the SLR. StArt also provides some assistance for ``snowballing,'' the process in which researchers trace the citations of a paper forward and backwards, by comparing identified studies with the references of the studies. StArt also includes visualizations that assist in the development of the search strings and the documentation of the review.
+
+Second, SLuRp~\cite{Bowes_et_al_2012} is a web based tool that functions as the central repository for an SLR research team. The repository provides a common storage location for the SLR protocol, PDF copies of the studies under review, and associated reference information. Additionally, SLuRp provides facilities to manage the assignment of studies for review to the different researchers on the team and to collect the results of these reviews.
+
+% vim:syntax=tex

@@ -1,0 +1,54 @@
+The next section of this proposal
+offers some design principles for {\IT}.
+These principles were learned
+as part of planning grant NSF CNS-1305395 where PI Carver conducted a community survey and a series of community workshops to identify the SE community needs for SLR infrastructure~\cite{hassler2014outcomes, carver2013identifying, hassler2016identification}.
+The rest of this section describes the results of that planning grant.
+\vspace{8pt}
+
+\subsection{Results of Community Survey}
+In preparation for the Community Workshops described in the following sections, we surveyed published SLR authors to understand their SLR process, the difficulties they encountered, and the areas most in need of tool support.
+Based on the 59 responses we identified four primary areas in need of infrastructure support~\cite{Carver-etal:13}:
+\vspace{-8pt}
+\begin{itemize}
+	\item Systematically identifying relevant papers from the literature;
+	\vspace{-4pt}
+	\item Conducting collaborative SLRs;
+	\vspace{-4pt}
+	\item Storage of extracted data from papers; and
+	\vspace{-4pt}
+	\item Evolution of SLRs over time.
+\end{itemize}
+
+\subsection{Overview of Community Workshops}\label{sect:work}
+\noindent
+To gather additional community input, we ran the following workshops:
+\bi
+\item \textbf{ESEIW'13}: 
+The first workshop, held concurrently with the 2013 Empirical Software Engineering International Week (ESEIW), focused on identifying and ranking barriers to the execution of the SLR process.  
+Utilizing a nominal group technique~\cite{Delbecq-etal:75,Lethbridge-etal:00}, the ESEIW workshop participants generated over 200 individual ideas, which they consolidated into 45 composite barriers in the SLR process. 
+Independently, the EASE workshop participants identified 28 composite barriers (21 matched barriers from the ESEIW workshop and 7 new ones focused on tool features).
+\item \textbf{EASE'14}:
+The second workshop, held in conjunction with the 18th International Conference on Evaluation and Assessment in Software Engineering (EASE), validated the results of the first workshop and served primarily to identify and rank the requirements for an SLR infrastructure.
+The workshop participants were all researchers actively engaged in the production of SLRs in the SE domain.  
+The 30 attendees represented a globally diverse slice of the community with representatives from North America, South America, and Europe.  
+\ei
+% \subsection{Analysis of Existing Tools}
+\input{sec_tools}
+
+\subsection{Requirements for an SLR Tool}\label{tion:results}
+Following on from the above community engagement exercises,
+and using the results of the surveys and discussions at those  workshops, we were able to identify a number of detailed requirements for an SLR infrastructure.
+We abstracted those detailed requirements into the following list of high-level requirements to drive the design and development of {\IT}.
+\be
+		\item Support task automation -- substitute algorithmic and computer cycles for human work
+		\item Support automated guidance (phase protocol execution support)
+		\item Support iteration within and among SLR Phases
+		\item Support project collaboration and coordination of work teams
+		\item Support monitoring of progress and quality
+		\item Support revised planning
+		\item Support data interchange across all SLR phases
+		\item Support existing and future tools through workflow integration and data interchange
+		\item Support an open architecture
+\ee
+The next section argues that these requirements can be addressed via a novel infrastructure combing some systems utilities with the manual and automatic methods of \tbl{overview}.
+\vspace{8pt}

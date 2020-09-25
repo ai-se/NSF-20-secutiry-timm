@@ -1,0 +1,33 @@
+\begin{table*}[!t]
+\small
+\centering
+\caption{14 independent   features extracted by Commit.Guru \cite{kamei12_jit}.}
+\vspace{-10pt}
+\label{tbl:metrics}
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|l|l|p{12cm}|}
+\hline
+\rowcolor{gray!30}Dimension & Name & Definition & Rationale \\\hline
+\multirow{5}{*}{Diffusion} & NS & Number of modified subsystems & Changes modifying many subsystems are more likely to be defect-prone \\\cline{2-4}
+& ND & Number of modified directories & Changes touching more directories
+are more likely to introduce defect. \\\cline{2-4}
+& NF & Number of modified Files & Changes touching more files
+are more likely to introduce defect. \\\cline{2-4}
+& Entropy & Number of modified subsystems & Changes with high entropy are more
+likely to introduce technical debt, since a developer will
+have to recall and track more scattered changes across
+each file. \\\hline
+\multirow{3}{*}{Size} & LA & Lines of code added & \multirow{2}{*}{Changes touching more lines of code are more likely to introduce defects.} \\\cline{2-3}
+& LD & Lines of code deleted & \\\cline{2-4}
+& LT & Lines of code in a file before the changes & The larger the file/module, the more likely that the change would be defective. \\\hline
+\multirow{2}{*}{Purpose}  & FIX & Whether the change is bug-fixing? & Changes that fixing the defect are more likely to introduce more defects than changes for new functionality implementation. \\\hline
+\multirow{5}{*}{History} & NDEV & Number of developers that changed the modified files & Changed files touched by more developers before are more likely to introduce defects, since different developers have different design thoughts and code styles. \\\cline{2-4}
+& AGE & The average time interval between the last and the current change & More recent changes (lower age) contribute more defects than older changes (longer age). \\\cline{2-4} 
+& NUC & Number of unique changes to the modified files before & Larger NUC changes are more likely to
+introduce defects since a developer will have to recall and track many previous changes. \\\hline
+\multirow{5}{*}{Experience} & EXP & Developer experience & The experience of developers has an impact on introducing TD \\\cline{2-4}
+& REXP & Recent developer experience & The experience of developers that has often modified the files are less likely to introduce defects (more familiar with the system).  \\\cline{2-4}
+& SEXP & Developer experience on a subsystem & Modifications that are made by developer that are familiar with the subsystems are less likely to introduce defects.  \\\cline{1-4}
+
+\end{tabular}} 
+\end{table*}

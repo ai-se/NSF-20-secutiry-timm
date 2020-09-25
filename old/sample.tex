@@ -1,0 +1,79 @@
+\begin{table}
+\caption{Initially,
+this proposal will focus on the following
+ samples of active computational science projects
+(all of which are found in on-line open source repositories). 
+{\normalfont Robert Sinkovits (from XSEDE) comments that many of these codes account for the majority of the supercomputer usage in computational
+science. While some of these  focus on  computational chemistry,  they   also   include  numerous widely-used support tools (e.g
+elasticsearch) or simulation tools that are cross-disciplinary (e.g. the classical simulation tools
+used  by molecular biologists).  Also, there are also tools here used in material science (e.g. LAMMPS).
+Further, these are just some of the projects found during an initial EAGER-funded projects so, during the three years of
+this current proposal, we anticipate that many more projects will be discovered and analyzed by {\IT}.}
+}\label{tbl:samples}
+{\footnotesize
+\begin{center}
+\begin{tabular}{r|l@{~}rrr@{~}r@{~}r@{~}rrc}
+\renewcommand{\baselinestretch}{0.7}
+&   &   &   &   &  &  &   & Analyzed\\  
+ & Language & \# Developers & Duration(Years) & \# Commits & \# Stars & \# Issues & \# Releases & in Figure~2\\ 
+\hline
+BLIS & C & 20 & 4.8 & 1242 & 413 & 142 & 25 &   \\ 
+cctools & C	 & 43	& 5.5 & 8881	& 72 & 666 & 159  &   \\
+keplerproject & C & 22	& 5.25 & 329 & 26 & 66	& 18 &   \\
+
+\hline
+\rowcolor{blue!10}AMBER & C++ & 12 & 4 & 8382 & 32 & 249 & 3 & \checkmark\\
+changa & C++ & 19	& 3.5 & 1458 & 13 & 16 & 8 &   \\
+cyclus & C++ & 20	& 6.5 & 6579 & 36 & 625	& 47 &   \\
+dealii & C++ & 120 & 18 & 41514 & 382 & 1604 & 26 &   \\
+GooFit & C++ &	12	& 5.5  & 1508	& 57 & 50	& 12 &   \\
+\rowcolor{blue!10}HooMD-blue & C++ & 36 & 2.5 & 9450 & 54 & 330 & 25 & \checkmark \\
+irods & C++	& 36 & 5 & 6267 & 236 & 3820 & 34 &   \\
+\rowcolor{blue!10}LAMMPS & C++ & 74 & 5.13 & 15814 & 383 & 294 & 91 & \checkmark \\ 
+\rowcolor{blue!10}LIBMESH & C++  & 55 & 6 & 17133 & 247 & 449 & 59 & \checkmark \\ 
+MADNESS & C++ & 31 & 4.5 & 5193 & 71 & 184 & 3 &   \\
+metpy & C++	& 34	& 7.75 & 2199 & 332 & 481 & 20 &   \\
+OpenMm & C++ & 38 & 7 & 5838 & 324 & 959 & 22 &   \\
+OpenMX & C++ & 11 & 5 & 6993 & 26 & 79 & 62 &   \\
+\rowcolor{blue!10}PCMSolver & C++ & 8 & 4 & 1844 & 13 & 88 & 16 & \checkmark \\ 
+PLUMED & C++ & 23 & 5.5 & 8075 & 92 & 282 & 35 &   \\
+Psi4 & C++ & 79 & 5.5 & 12178 & 247 & 504 &	7 &   \\
+SCIRun & C++ & 18	& 6.5 & 8887 & 45 & 1487 &79 &   \\
+TRILINOS & C++ & 179 & 3 &	79520 & 310  &	2063 &	141 &   \\\hline
+  \rowcolor{blue!10}ABINIT  & Fortran & 23 & 2.3 & 6793 & 53 & 13 & 96 & \checkmark  \\ 
+ OpenMolcas & Fortran & 29 & 1 & 565 & 29 & 52 & 2 &   \\ 
+MPQC & C++, Fortran & 12 & 5 & 6362 & 28 & 44 & 57 &   \\
+NWChem & Fortran & 29 & 1 & 26013 & 70 & 33 & 5 &   \\
+OpenMPI & C, Fortran & 147 & 4 &	28680 & 627 & 1424  & 99 &   \\
+quantum\_package & Fortran & 11 & 4.5 & 2721 & 18 & 92 & 5 &   \\\hline
+elasticsearch & Java & 1103 & 8.5 & 42349 & 37757 & 16918 & 223 &   \\
+learnsphere & Java &  9 & 2.5 & 646	& 11 & 34 & 1 &   \\
+orca & Java	& 11 & 3.5 & 1103 & 1 & 143	& 19 &   \\
+trellis & Java & 3 & 2 & 892 & 26 & 171 & 10 &   \\
+\rowcolor{blue!10}Xenon & Java  & 11 & 9 & 2315 & 15 & 378 & 21 & \checkmark \\\hline
+abaco & Python 	& 8	& 3.5 & 1112 & 13 & 29 & 7 &   \\
+APBS & Python & 19 & 5 & 6642 & 67 & 501 & 8 &   \\
+forcebalance & Python &	10 & 5 & 1562 & 48 & 47 &	6 &   \\
+foyer & Python & 10 & 3.5 &	343 & 19 &	66 & 8 &   \\
+hydroshare & Python	& 30 & 4 &	9387 & 63 & 1708	& 55 &   \\
+Luigi & Python & 35 & 6 & 3628 & 10348 & 628	& 37 &   \\
+mast & Python & 22	& 5.5 & 5050 & 8 & 471	& 69 &   \\
+\rowcolor{blue!10} MDAnalysis & Python & 76 & 3.5 & 5120 & 233 & 1087 & 46 & \checkmark \\
+mdtraj & Python	& 45	& 6 & 2971 & 189 & 682	& 21 &   \\
+openforcefield & Python &	8	& 1 &1360 & 37	& 70	& 5 &   \\
+openmmtools & Python &	10 & 4 &	1156 & 40  & 154	& 31 &   \\
+parsl & Python & 11	& 2 & 1268 & 63 & 258	& 15 &   \\
+pymatgen & Python & 107	& 7 & 14989	& 322 & 359	& 228 &   \\
+pyscf & Python	& 36 & 4.5 & 4666 & 217 & 101	& 41 &   \\
+radical-pilot & Python & 17	&  5 & 56900 & 26 & 1269 & 137 &   \\
+\rowcolor{blue!10} RMG-Py & Python  & 43 & 1 & 7548 & 112 & 678 & 17 & \checkmark \\
+signac & Python	& 8	& 2 & 5000 & 8	& 89 &	5 &   \\
+signac-flow & Python &	8 & 2 & 1000 & 5 & 28	&3 &   \\
+TauDEM & Python	& 11 & 5.5 & 298 & 102 & 132 & 10 &   \\
+Use Galaxy & Python	& 188 & 3.5 & 36005 & 507 & 2269 & 51 &   \\
+yank & Python &	8 & 5  &	2728 & 41 & 557 & 34 &   \\
+yt & Python & 93 & 1.5 & 23923 & 138 & 1216 & 37 &   \\
+
+\end{tabular}\end{center}}
+\label{tbl:summary}
+\end{table}

@@ -1,0 +1,526 @@
+
+\section{Rest}
+Our experiments show that with  CART as the data miner,
+BPO for softare configuration problems outperforms  state-of-the-art 
+prior results~\cite{zuluaga2016varepsilon} (that used
+Gaussian Process Models). 
+That said,
+prior to this proposal, hyperparameter optimization has not been thoroughly explored
+for  vulnerability prediction. 
+Table \ref{tbl:fairness_cost} shows the results of our approach (FLASH) and four algorithms from prior works. We see that there are a few gray cells and many black cells indicating that achieving fairness damages performance - which bolsters the conclusion made by Berk et al.\cite{berk2017convex}. In summary,  fairness can have a cost. Our next question checks if multiobjective optimization can better trade-off between performance and fairness.  
+
+
+Yes. Here, we applied  FLASH algorithm but this time, we considered four goals together: \textit{recall, false alarm, AOD, EOD}. The first two are related to performance and second two are related to fairness. For
+recall, {\em larger} values are {\em better} while for everything
+else, {\em smaller} is {\em better}.
+ For this part of our study, we used two learning models - logistic regression and CART. 
+ %Afer a model is learnrf from the training set. On the validation set, the model is tuned and recall, false alarm, AOD \& EOD are noted down when tuned learner is applied on the test set.
+ 
+ We have chosen four hyperparameters for both the learners to optimize for. For logistic regression (C, penalty, solver, max\_iter) and for CART - (criterion, splitter , min\_samples\_leaf, min\_samples\_split). Table \ref{tbl:multiobjective_results} shows the results. The ``Before'' column shows results with no tuning and ``After'' column shows tuned results. We can see that for
+ the German dataset, we improved three objectives and recall did not decrease. In the Adult dataset, we improved three objectives with minor damage of recall. 
+ With the
+ Compas dataset, there was no improvement. 
+ 
+ In summary, the results are clearly indicating if  multiobjective  optimization understand {\em all} the goals of learning
+ (fairness {\em and performance}), then it is possible to achieve one without
+ damaging the other. Our last research question asks  what is the cost of this kind of optimization.
+
+{\em Q6. How much time does optimization take?}
+
+Default logistic regression takes 0.56s, 0.15s and 0.11s for Adult, Compas and German dataset respectively. When we apply hyperparameter optimization, the cumulative time for training, tuning and testing become 16.33s, 4.34s and 3.55s for those datasets. 
+We assert that  runtimes of less than 20 seconds is a relatively small price to pay to ensure fairness. 
+
+As to larger, more complex problems, Nair et al.~\cite{8469102} reports
+that FLASH scales to problems with larger order of magnitude than other optimizers. It is a matter for future research to see if such scale is possible/required to handle fairness of SE data. 
+
+
+
+But before we can suggest that all models be made fairer with hyperparameter optimization, we must address the computational cost of those methods.
+Hyperparameter optimization is that it can  be very CPU expensive:
+\bi
+\item
+Naive methods like grid search\footnote{Given N control parameters, create N nested for-loops that try many combinations of all parameters~\cite{Bergstra:2012}.} require thousands to millions of executions of a learner. 
+\item
+Non-naive  methods such those using Bayesian Parameter Optimization~\footnote{Using a model that is updated incrementally, an {\em acquisition function}  reflects on the as-yet-unanalyzed possibilities selects the most informative possibility.
+This is evaluated, the model is updated, and the process repeats~\cite{nair2017flash,zuluaga2016varepsilon,Golovin:2017}.}
+still need dozens to hundreds of executions. 
+\item
+Depending  on the nature of the learner and the size of the data set,
+running a learner  
+dozens to hundreds of times may be very   expensive (e.g. large data sets run through deep learners are particularly slow). 
+\ei
+
+Recent advances in software engineering offer an intrugiing solution to the problem  opened up the possibility
+of {\em societies of hyperparameter optimizers}. The next section of this proposal discusses {\em Model Stores} which are on-line venues offering hundreds of machine learning models to customers. As discussed below, such Model Stores could unwittingly enable the wide spread dissemination of models with significant levels of group discrimination. That is, all those models could use or hyperparameter optimizers. But there is a problem with that approach.
+\bi
+\item Within on-line Model Stores, users pay for any associated CPU costs. 
+\item 
+\item 
+\item That is, our methods for creating fair models may be depreciated Users may incur a stiff penalty for using our methods
+\ei
+
+
+While our current results on hyperparaemter optimization and fairness are promising, they are somewhat limited. Firstly, they are based on just a  few data sets. Secondly,
+our current methods all as
+The authors of this proposal have had much prior experience with hyperparameter optimization~\cite{XXX}. All that work
+had the same experimental setting: given 1 data set, 1 learner,  $G$ goals and no prior knowledge,
+ discover  control parameters for that learner that resulted in a model that best achieved those goals. This approach, while useful, can be extremely slow. Depending on the  implementations of hyperparameter optimization, that approach requires thousands to millions of executions. For example,   Wagner et al. needed 30 years of CPU for their hyperparaemter optimization of text mining applications; Even with faster
+ 
+The premise of this work is that issues of fairness must be considered at all stages
+of model construction. What we can show is that
+{\bf if fairness is not known to be a goal}, then {\bf the resulting models are unlikely to be fair models}.
+\section{Case Study: Mitigating Unfairness in ``Model Stores''}
+Given recent advances in software development,
+it is now an open and 
+urgent problem to detect and mitigate
+  group discrimination in machine learning models.
+  This describes those advances. In summary,
+  
+  
+  
+  It is now trivial to package and distribute even
+  the most complex machine learning process
+  as containers executing in the cloud.
+   Specifically,
+   it is now a mere matter of hours to take a Github repo with some example shell  scripts, and turn that code into a cloud-based application\footnote{E.g. see opendatahub.io's machine-learning-as-a-service platform based on Kupernetes that can rapidly transfer Juypter notebooks (developed locally)  to cloud-based
+  execution environments.}.
+  Hundreds of
+  such containers are now available for rent, in
+  ``model stores'' at  AWS marketplace XX;
+  Wolfram neural net repository ZZ;  and  the  ModelDepot YY
+(see \tbl{stats}).  Users can
+rent these models, as well as the cloud-CPU required
+to execute them. In this arrangement, users upload their data to the cloud-based model. Then, later on,
+they download the generated model. 
+
+These tools have simplified the generation and distribution of machine learning models.
+However, regrettably, they have also made it much simpler to 
+unwittingly  distribute  software that exhibits
+``group discrimination''.  The model store sites caution
+users to beware biases in their model generation methods, or the generated model. However, they offer no tools for detection   such bias, or mitigating such bias (if it exists). This is despite the fact
+that many of these models contain attributes that we might want to detect.
+For example, to support this proposal, we sampled 32 models at random from
+the AWS model store. We found several eight models that  that could could inappropriately target protected social groups (e.g. age, gender or race). A sample of those models are shown in \tbl{msample}
+
+\begin{table}
+\small
+\begin{tabular}{|p{0.8in}|p{5.4in}|}\hline
+\rowcolor{gray!20}
+ {\em hyScore} & {\em hyScore} is an NLP tool which, amongst other things, performs  sentiment analysis of content. hyScore accepts arbitrary free form text which, potentially, could reference   social groups we might want to protect.
+ \\ 
+ {\em  Credit Default Predictor} &{\em Credit Default Predictor} uses   23 attributes include gender, education. age, and previous history of payments to generate an   predictor of the chances a customer will default on a loan
+ \\
+\rowcolor{gray!20}
+{\em Hospital Readminission} &
+The decision whether or not to discharge a patient can be a life or
+death decision since, if the wrong patient's are discharged, they
+will not have access to   intra-hospital services if they have an acute medical event. The {\em Hospital Readminission} model predicts the probably that a patient will not be readmitted after discharge. This model's inputs include financial class, sex and age. Depending on the protected attributes a hospital may decide not to release the patient as the model shows high probability of readmission, while another patient with same other attributes but different protected attribute values can be released.
+\\
+\hline
+\end{tabular}
+\caption{A sample of models that from the AWS model store
+that might  could inappropriately target protected social groups (e.g. age, gender or race). Note that this list is based on a quick survey
+of 32 of the 300+ models currently available on-line.
+Based on this survey, we conclude that many of Model Store
+applications could produce unfair models.}
+\label{tbl:msample}
+\end{table}
+
+
+Paradoxically,   Model Stores are both the worst and best thing to happen to model fairness. On the one hand, they have the potentially to make the mode; fairness problem much worse as more models are used uncritically
+by consumers who are unaware of the biases of those models.
+But on the other hand, Model Stores have the potentially to dramatically simplify the problem of generating fair models. 
+
+To understand this point, consider the following three points.
+Fristly, as shown later in this proposal, if a hyperparameter optimizers
+is aware of fairness goals, then those optimizers can generate models
+that good predictors without also being unfair to social groups we might wish to predict.
+
+Secondly,  hyperparameter optimization slows down the process of model generation. Naive optimizers may require thousands to millions of executions of a learner\footnote{e.g. grid search}. Smarter optimization strategies require fewer executions\footnpte{e.g Bayes parameter optimization} but even here, tens to hundreds of executions might be required. For large data sets or slow learners, this can be unacceptable especially when the user of the machine learner is paying for the cloud CPU time required to learn the model. 
+
+Thirdly
+
+
+While this a
+  
+it is now trivial to deploy even
+the most complex machine learning method. 
+
+This section
+describes those advances as well as what that means
+for packaging and distributing machine learning models.
+In summary 
+It 
+
+
+  Various crowd computing vendors are now running ``model store'' where customers
+  rent cloud CPU time to run their data through cloud-based machine learning apps. Xie et al.~\cite{xiu2019exploratory} report that  
+  now offer 339 models (see \tbl{stats}). 
+  
+Due to recent advances in software development,
+we can reasonably expect that the number of such models will increase very    increasing. At the SEMLA'19 meeting~\cite{semla19}
+the software distribution company Redhat described how they are
+teaming with many organizations to streamline ``containerization'' services. ``Containers'' are ways to wrap up and disseminate to the cloud sets of software services. While the services themselves may be complex to build, for the user of the container, it is just a matter of loading and running the container on their favorite cloud service provider. 
+
+hat are 
+
+Issues of machine learning model 
+a small fraction of   possible models say that {\e fairness is a choice}
+e observe t set and the shat, during learning of the data,  To fix this problem we propose moving the fairness goal into the model generation process. Specifically, we will explore if 
+  {\bf  hyperparameter optimization} can automatically find tunings for learners such that they generate fair modes without losing predictive performance. Our preliminary results are promising. We have shown that  hyperparameter optimization can (a) preserve the predictive power of a model learned from a data miner while also (b) generates fairer results. 
+  
+  That said, our
+  hyperparameter optimization methods are resource expensive. Hence, to support    widespread fariness via hyperparameter optimization , we need to find linear (or sub-linear) time optimizers. 
+  For this research we will explore how   {\em not} to tune from scratch.
+  Rather, we will bootstrap the  tuning
+  process by  {\em transferring}, then {\IT}ing with  old tunings.
+  
+This paper shows that making fairness as a goal during hyperparamter optimization can (a) preserve the predictive power of a model learned from a data miner while also (b) generates fairer results. To the best of our knowledge, this is the first application of hyperparameter optimization as a tool for software engineers to generate fairer software.
+
+
+ \section{Background}\label{tion:back}
+
+Machine learning software, by its nature, is always a form of statistical discrimination. 
+Those discrimination becomes objectionable when it places certain privileged groups at  a systematic advantage and certain unprivileged groups at a systematic disadvantage. In certain situations, such as employment (hiring and firing), discrimination is not only objectionable, but illegal.
+
+Much resaerch In our own domain Issues of \textit{fairness} have been explored in many  recent papers in the SE research literature.
+In summary, that work concludes that fairness is an important issue:
+\bi
+\item Angell et al. \cite{Angell:2018:TAT:3236024.3264590}  note that     ``fairness'' is analogous to other measures of software quality. \item Galhotra et al discussed how to efficiently generate test cases to test for discrimination\cite{Galhotra_2017}. \item Udeshi et al. \cite{Udeshi_2018} worked on generating discriminatory  inputs for machine learning software. \itemAlbarghouthi et al. \cite{Albarghouthi:2019:FP:3287560.3287588} explored if fairness can be wired into annotations within a program.
+\item Tramer et al. proposed different ways to measure discrimination \cite{Tramer_2017}.
+\ei
+All the above SE research detects unfairness. Our work takes a step further and asks how to mitigate
+unfairness. We propose that every machine learning model must go through fairness testing phase before it is applied. If bias is found, then the model needs to be optimized. Hence, we have converted ``discrimination problem'' into an optimization problem. We think that if \textit{fairness} becomes a goal while learning, then the  models created in that way will generate fairer results. In this study, we investigated whether model parameter tuning can help us to make the model fair or not. 
+ 
+ In machine learning, many  {\em hyperparameters} control   inductive process ; e.g. the   `splitter' of CART~\cite{breiman2017classification}.  They are very important because they directly control the behaviors of the training algorithm and impact the performance of the model. Therefore, the selection of appropriate parameters plays a critical role in the performance of machine learning models. Our study applies \textit{hyperparameter optimization} to make a model fair without losing predictive power. So, it becomes \textit{multiobjective optimization} problem as we are dealing with more than one objective. 
+ 
+
+ 
+With algorithmic decision making becoming the norm, the issue of algorithmic fairness has been identified as a key problem of interdisciplinary dimensions \cite{IBM} . Machine learning models are used to support decision making in high-stakes applications such as mortgage lending, hiring, and prison sentencing~\cite{ladd1998evidence,burrell2016machine,corbett2018measure,galindo2000credit,yan2013system,chalfin2016productivity,ajit2016prediction,berk2015machine,berk2016forecasting,ozkan2017predicting}. In recent years, researchers have found unfairness in ML models \cite{IBM}. It is high time to put a sincere effort to achieve fair decision making using ML models.
+
+Current fairness research focuses on mainly two directions - detecting or measuring  the unfairness and mitigating the unfairness. Galhotra et al. proposed an approach to generate efficient test suites to measure software discrimination \cite{Galhotra_2017}. When it comes to mitigate unfairness in ML models, AI researchers are still confused as they need to deal with questions such as ``Should the data be debiased?'', ``Should new classifiers will be created that learn unbiased models?'', or ``Is it better to correct predictions from the model?''. 
+
+%  \begin{wrapfigure}{r}{4.8in} 
+% %\begin{table}[!b]
+% \caption{Sample of Previous Studies}
+% \small
+%  \begin{center}
+% \begin{tabular}{p{0.6in}|p{3.9in}}
+    
+%   \rowcolor{blue!10} Datasets & Adult Census Income, German Credit, COMPAS\\
+%     \hline
+%     Metrics&Disparate impact\\
+%     &Statistical parity difference\\
+%     &Average odds difference\\
+%     &Equal opportunity difference\\
+%     \hline
+%     \rowcolor{blue!10}Pre-  & Re-weighing (Kamiran et al., 2012) \cite{Kamiran2012}\\
+%     \rowcolor{blue!10} processing& Optimized pre-processing (Calmon et al., 2017) \cite{NIPS2017_6988} \\
+%   \rowcolor{blue!10}  & Algorithms Learning fair representations (Zemel et al., 2013) \cite{pmlr-v28-zemel13}\\
+%     \rowcolor{blue!10} & Disparate impact remover (Feldman et al., 2015) \cite{Feldman:2015:CRD:2783258.2783311}\\
+%     \hline
+%   In-     & Adversarial debiasing (Zhang et al., 2018) \cite{Zhang:2018:MUB:3278721.3278779}\\
+%     processing& Algorithms Prejudice remover (Kamishima et al., 2012) \cite{Kamishima}\\
+%     \hline
+%   \rowcolor{blue!10}  Post-   & Equalized odds post-processing (Hardt et al., 2016) \cite{Hardt}\\
+%     \rowcolor{blue!10}processing & Algorithms Calibrated eq. odds postprocessing (Pleiss et al., 2017) \cite{NIPS2017_7151}\\
+%   \rowcolor{blue!10}  & Reject option classification (Kamiran et al., 2012) \cite{Kamiran:2018:ERO:3165328.3165686}\\
+   
+% \end{tabular}
+% \end{center} 
+% \label{tbl:multicol}
+% %\end{table}
+% \end{wrapfigure}
+ 
+ \tbl{multicol} shows a  quick summary of research into fairness. That table shows a sample of  the datasets, metrics, classifiers, and bias mitigation algorithms used and developed so far. In the literature, it is claimed that
+adversarial debiasing works best\cite{Zhang:2018:MUB:3278721.3278779} (but as shown in Figure~1, discussed below, adversarial debiasing has certain drawbacks). The idea of adversarial debiasing is to include a variable for the group of discrimination and simultaneously learning a predictor and an adversary. The input to the network X, produces a prediction Y, while the adversary tries to model a protected variable Z. The objective is to maximize the predictor's ability to predict Y while minimizing the adversary's ability to predict Z. 
+
+Our experience is that most of the fairness algorithms, including
+adversarial debiasing   achieve fairness by damaging
+predictive performance.  Fig.~1 shows that various fairness algorithms damage model accuracy to achieve fairness ( tested on  Adult Census Income with protected attribute - "Sex")~\cite{IBM}.
+Therefore, it is an open and urgent research challenge to gain fairness without damaging the performance of the decision-making algorithm or ML model. 
+
+Our preferred method for avoding 
+% Sometimes, it is appropriate to call our  certain social groups. For example,
+% we should expect our machine learning algorithms to warn that older people need extra monitoring
+% for cardiac issues. That said, sometimes, such reports are trite summary of simplisttic correlations
+% and not comments on deep issues with the data. 
+In our experience, one data set can be fitted
+to many models (just by changing the control parameters of the machine learner). Suppose:
+\bi
+\item
+There are
+$N$ models with equivalent predictive power;
+\item
+And a few  $M<N$ of those models do not make use of information
+such as race, age, or gender. 
+\item
+In terms of the fairness evaluation measures defined below,
+that means that now there are $M$ ``fair'' models and $N-M$ ``unfair'' models. 
+\ei
+Common practice is not generate multiple models for one data set. In our literature
+reviews on this matter, we find that very few researchers recommend
+the generating and exploring multiple
+models. For example, in our review of  hyperparameter model optimization  we found that in of 200+ highly cited papers in the last decade,
+only 20\% of them using hyperparameter optimation (i.e. the automatic exploration
+of many models of control
+parameters of a learner),
+
+In that case, we say that ``fairness is a choice'' since a data scientist can choose
+to deploy fair or unfair models. But since $N<N$ then that means if a data scientist
+chooise also that since $M<N$ then we sautat
+``not chooisin
+With that 
+
+
+At that point, the data scientist has a {\em choice} of using
+models that call out certain social groups and those that do not. 
+
+
+% Much recent empirical SE research has focused on this data, and how
+% to leverage this kind of Github data to build software quality models~~\cite{commitguru, Kim08changes,catolino17_jitmobile,nayrolles18_clever,mockus00changeskeys,kamei12_jit,hindle08_largecommits}.
+
+%  To simplify the creation and maintenance of computational science software, we   propose  the  {\IT}\footnote{ Short for 
+% ``empirical \underline{SE} \underline{n}ow \underline{TRY}-ed on  computational science code''.} empirical software engineering workbench.
+% {\IT} contains a set of automatic agents that read code and comments and test
+% results from on-line repositories of computational science code.  {\IT} will advise:
+% \bi
+% \item[(a)] Where defects are hiding the code;
+% \item[(b)] How to prioritize test cases (so tests  likely to fail are executed sooner); 
+% \item[(c)] The appropriate number of programmers required
+% for each project; 
+% \item[(d)] Now to avoid spurious error messages (e.g. from static code analysis tools);
+% \item[(e)] Other issues, if time permits.
+% \ei
+% While many parts of {\IT} have been proposed in other domains,
+% results from a recent NSF EAGER grant, described below\footnote{CISE EAGER \#1826574.  Empirical Software Engineering for Computational Science. April 2018 to April 2019. PI= Tim Menzies.}, show that standard SE needs adaptation before it can succeed on computational
+% science software. This proposal would explore cost-effective methods for managing that adaption process. The resulting agents
+% will then be tested on all the   computational science projects currently available on the web (e.g. see the sample in  \tbl{samples}).
+%  This, in turn, will enable faster and better  software development  leading to   faster and greater progress in computational science.
+% \input{sample}
+
+
+
+ 
+% Standard methods in empirical software engineering (SE) needs to be adapted before it can be safely deployed in other
+% domains like computational science (see below, example in defect prediction). But what adaption methods are useful/useless? Are
+% they cost effective? Do they work effectively across multiple data sets? We have some preliminary results suggesting that the work
+% for (a) defect prediction but can we also adapt other tasks such as (b) test case prioritization, (c) effort estimation, (d) learning to
+% avoid spurious error message; (e) etc.
+
+
+
+
+
+\section{Frequently Asked Questions}\label{tion:faq}
+{\em Q1: XXX}
+ why not just throw away the attributes? not all data sets are like adult etc. They may be inexerably
+ connected to the goal. So a learner will have to use them. goal then is ti use them the least amount.
+ 
+And if that does not convince you, and you still want to discard them, Cant assess if they are useless (abd can be thrown away) if you dont see how well you can do without them or with minimal use of the those attributes. So something like TINKER is essential, just to gauge the extent to which the current data set has a group discrimination problem.
+
+{\em Q1: Does software discrimination(bias towards certain attribute) matters?}
+
+Yes.Google's sentiment analyzer model which determines positive or negative sentiment, gives negative score to the sentences such as \textit{`I am a Jew', and `I am homosexual'}\cite{Google_Sentiment}. Facial recognition software which predicts characteristics such as gender, age from images has been found to have a much higher error rate for dark-skinned women compared to light-skinned men \cite{Gender_Bias}. A popular photo tagging model has assigned animal category labels to dark skinned people \cite{Google_Photo}. Recidivism assessment models used by the criminal justice system have been found to be more likely to falsely label black defendants as future criminals at almost twice the rate as white defendants \cite{Machine_Bias}. Amazon.com stopped using automated job recruiting model after detection of bias against women\cite{Amazon_Bias}. Cathy O'Neil’ provided even more examples of unfair decisions made by software in her book ``Weapons of Math Destruction''\cite{O'Neil:2016:WMD:3002861}. She argued that machine learning software generates models that are full of bias. Hence, this is one of the reasons their application results in unfair decisions.
+
+{\em Q2: Does certain attributes(protected) creates software  discrimination in prediction results ?}
+
+Yes.
+
+{\em Q3: Fairness: detrimental to accuracy ?}
+
+Yes.Our experience is that most of the fairness algorithms, including
+adversarial debiasing   achieve fairness by damaging
+predictive performance.  Fig.~\ref{tbl:Fairness} shows that various fairness algorithms damage model accuracy to achieve fairness ( tested on  Adult Census Income with protected attribute - "Sex")~\cite{IBM}.
+Therefore, it is an open and urgent research challenge to gain fairness without damaging the performance of the decision-making algorithm or ML model.  
+
+
+
+{\em Q4: Does optimizing for fairness damage model prediction performance ?}
+
+
+
+No. We have verified our method along with four other related works to answer this question. Table \ref{tbl:dataset} shows the datasets we used. We randomly divided them into three sets - training (70\%), validation (15\%) and test (15\%). Prior researchers who worked with these datasets have used \textit{Logistic Regression} as classification model \cite{Kamishima,NIPS2017_6988,Hardt}. We also decided to use this learner. Before moving to results, here we briefly describe prior works which we selected for our study. There are mainly three kinds of prior works -
+
+\bi
+\item \textbf{Pre-processing algorithms}: In this method, data is pre-processed(before classification) in such a way that discrimination is reduced. Kamiran et al. proposed \textit{Reweighing} \cite{Kamiran2012} method that generates weights for the training examples in each (group, label) combination differently to ensure fairness. Later, Calmon et al. proposed an \textit{Optimized pre-processing} method \cite{NIPS2017_6988} which learns a probabilistic transformation that edits the labels and features with individual distortion and group fairness.
+
+
+\item \textbf{In-processing algorithms}: This is an optimization approach where dataset is divided into train, validation and test set. After learning from training data, model is optimized on the validation set and finally applied on the test set. Our \textit{Hyperparameter Optimization} using FLASH approach lies into this category. Zhang et al. proposed \textit{Adversarial debiasing}  \cite{Zhang:2018:MUB:3278721.3278779} method which learns a classifier to maximize accuracy and simultaneously reduce an adversary's ability to determine the protected attribute from the predictions. This generates a fair classifier because the predictions cannot carry any group discrimination information that the adversary can exploit.
+
+
+\item \textbf{Post-processing algorithms}: Hereafter classification, the class labels are changed to reduce discrimination. Kamiran et al. proposed \textit{Reject option classification} approach \cite{Kamiran:2018:ERO:3165328.3165686} which gives unfavorable outcomes to privileged groups and favorable outcomes to unprivileged groups within a confidence band around the decision boundary with the highest uncertainty.
+
+\ei
+
+% Table \ref{tbl:fairness_cost} shows the results of our approach (FLASH) and four algorithms from prior works. We see that there are a few gray cells and many black cells indicating that achieving fairness damages performance - which bolsters the conclusion made by Berk et al.\cite{berk2017convex}. In summary,  fairness can have a cost. Our next question checks if multiobjective optimization can better trade-off between performance and fairness.  
+
+% {\em Q5: Can we optimize machine learning model for both fairness and performance?}
+
+% \begin{table*}[]
+% \centering
+% \footnotesize
+% \caption{Optimizing for fairness, lower false alarm and higher recall. Gray=improvement; black=damage.
+% Note that, compared to Table~\ref{tbl:fairness_cost}, there is far less damage.}
+% \label{tbl:multiobjective_results}
+% \begin{tabular}{|l|l|c|r|r|r|r|r|r|
+% >{\columncolor[HTML]{FFFFFF}}r |r|}
+% \hline
+% \cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \multicolumn{1}{l|}{\cellcolor[HTML]{C0C0C0}} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}Recall} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}False \\ alarm\end{tabular}} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}AOD} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}EOD} \\ \cline{4-11} 
+% \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Model} & \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Dataset} & \multicolumn{1}{l|}{\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}l@{}}Protected \\ Attribute\end{tabular}}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Before} & \cellcolor[HTML]{C0C0C0}After & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Before} & \cellcolor[HTML]{C0C0C0}After & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Before} & \cellcolor[HTML]{C0C0C0}After & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Before} & \cellcolor[HTML]{C0C0C0}After \\ \hline
+% \multicolumn{1}{|c|}{} &  & Sex & 83 & \cellcolor[HTML]{333333}{\color[HTML]{FFFFFF} 78} & 39 & \cellcolor[HTML]{C0C0C0}{\color[HTML]{333333} 32} & 31 & \cellcolor[HTML]{C0C0C0}09 & 49 & \cellcolor[HTML]{C0C0C0}15 \\ \cline{3-11} 
+% \multicolumn{1}{|c|}{} & \multirow{-2}{*}{Adult} & Race & 83 & \cellcolor[HTML]{333333}{\color[HTML]{FFFFFF} 80} & 39 & \cellcolor[HTML]{C0C0C0}{\color[HTML]{333333} 31} & 14 & \cellcolor[HTML]{C0C0C0}04 & 22 & \cellcolor[HTML]{C0C0C0}08 \\ \cline{2-11} 
+% \multicolumn{1}{|c|}{} &  & Sex & 65 & 65 & \cellcolor[HTML]{FFFFFF}{\color[HTML]{333333} 38} & 38 & 24 & 24 & 29 & 29 \\ \cline{3-11} 
+% \multicolumn{1}{|c|}{} & \multirow{-2}{*}{Compas} & Race & 65 & 65 & \cellcolor[HTML]{FFFFFF}{\color[HTML]{333333} 38} & 38 & 12 & 12 & 16 & 16 \\ \cline{2-11} 
+% \multicolumn{1}{|c|}{} &  & Sex & 74 & 74 & \cellcolor[HTML]{FFFFFF}2 & 2 & 12 & 12 & 04 & 04 \\ \cline{3-11} 
+% \multicolumn{1}{|c|}{\multirow{-6}{*}{\begin{tabular}[c]{@{}c@{}}Logistic\\ regression\end{tabular}}} & \multirow{-2}{*}{German} & Age & 74 & 74 & \cellcolor[HTML]{FFFFFF}2 & 2 & 44 & 44 & 08 & 08 \\ \hline
+%  &  & Sex & 83 & 83 & \cellcolor[HTML]{FFFFFF}36 & 36 & \cellcolor[HTML]{FFFFFF}29 & 29 & 46 & 46 \\ \cline{3-11} 
+%  & \multirow{-2}{*}{Adult} & Race & 83 & 83 & \cellcolor[HTML]{FFFFFF}36 & 36 & \cellcolor[HTML]{FFFFFF}14 & 14 & 24 & 24 \\ \cline{2-11} 
+%  &  & Sex & 65 & 65 & \cellcolor[HTML]{FFFFFF}35 & 35 & \cellcolor[HTML]{FFFFFF}25 & 25 & 29 & 29 \\ \cline{3-11} 
+%  & \multirow{-2}{*}{Compas} & Race & 65 & 65 & \cellcolor[HTML]{FFFFFF}35 & 35 & \cellcolor[HTML]{FFFFFF}23 & 23 & 26 & 26 \\ \cline{2-11} 
+%  &  & Sex & 74 & 74 & \cellcolor[HTML]{FFFFFF}5 & \cellcolor[HTML]{C0C0C0}29 & \cellcolor[HTML]{FFFFFF}15 & \cellcolor[HTML]{C0C0C0}1 & 14 & \cellcolor[HTML]{C0C0C0}3 \\ \cline{3-11} 
+% \multirow{-6}{*}{CART} & \multirow{-2}{*}{German} & Age & 74 & 74 & \cellcolor[HTML]{FFFFFF}5 & \cellcolor[HTML]{C0C0C0}29 & \cellcolor[HTML]{FFFFFF}60 & \cellcolor[HTML]{C0C0C0}53 & 21 & \cellcolor[HTML]{C0C0C0}7 \\ \hline
+% \end{tabular}
+% \end{table*}
+
+% Yes. Here, we applied  FLASH algorithm but this time, we considered four goals together: \textit{recall, false alarm, AOD, EOD}. The first two are related to performance and second two are related to fairness. For
+% recall, {\em larger} values are {\em better} while for everything
+% else, {\em smaller} is {\em better}.
+%  For this part of our study, we used two learning models - logistic regression and CART. 
+%  %Afer a model is learnrf from the training set. On the validation set, the model is tuned and recall, false alarm, AOD \& EOD are noted down when tuned learner is applied on the test set.
+ 
+%  We have chosen four hyperparameters for both the learners to optimize for. For logistic regression (C, penalty, solver, max\_iter) and for CART - (criterion, splitter , min\_samples\_leaf, min\_samples\_split). Table \ref{tbl:multiobjective_results} shows the results. The ``Before'' column shows results with no tuning and ``After'' column shows tuned results. We can see that for
+%  the German dataset, we improved three objectives and recall did not decrease. In the Adult dataset, we improved three objectives with minor damage of recall. 
+%  With the
+%  Compas dataset, there was no improvement. 
+ 
+%  In summary, the results are clearly indicating if  multiobjective  optimization understand {\em all} the goals of learning
+%  (fairness {\em and performance}), then it is possible to achieve one without
+%  damaging the other. Our last research question asks  what is the cost of this kind of optimization.
+
+% {\em Q6. How much time does optimization take?}
+
+% Default logistic regression takes 0.56s, 0.15s and 0.11s for Adult, Compas and German dataset respectively. When we apply hyperparameter optimization, the cumulative time for training, tuning and testing become 16.33s, 4.34s and 3.55s for those datasets. 
+% We assert that  runtimes of less than 20 seconds is a relatively small price to pay to ensure fairness. 
+
+% As to larger, more complex problems, Nair et al.~\cite{8469102} reports
+% that FLASH scales to problems with larger order of magnitude than other optimizers. It is a matter for future research to see if such scale is possible/required to handle fairness of SE data. 
+
+
+
+
+\section{ Technical Details}\label{tion:details}
+
+
+
+The rest of this proposal offers details  on the Strategies and Technical details for achieving fairness in ML model prediction results, that will implemented and explored as part
+of the {\IT} workbench. 
+
+\subsection{Target Endeavors}\label{tion:ende}
+
+{\IT} framework is intended to identify and mitigate ML model's bias towards protected attribute, which can introduce software discrimination into the model's prediction result. Therefore reducing software discrimination without sacrificing model's prediction power. This proposal will explore
+several  such tasks:
+
+
+\bi
+\item[(a)] {\em Testing for bias in the ML model}
+gives the user idea about presence of discrimination by the ML model on the protected attributes. Once we know the presence we can take corrective action to mitigate the bias/discrimination.
+\item[(b)]  {\em Quantitative measure of bias in the model } will allow us to understand amount of bias present in the model, thus assessing the effect of protected attribute in decision making by the ML model. Metrics such as Equal   Opportunity   Difference(EOD) or Average Odds Difference(AOD) will be useful in such assessment.
+\item [(c)] {\em Debiasing model }
+using standard state of the art (SOA) practices and algorithms such as adversarial debiasing, to evaluate the effect in model's performance.
+\item[(d)] {\em Optimization for fairness and performance} by utilizing multi-objective hyperparameter optimization to optimize the ML model to remove bias without sacrificing the model's performance. 
+\ei
+These tasks were selected since, as discussed below, there is much needed research on all the above.
+ 
+ \subsection{Practicality}\label{tion:practical}
+
+It is prudent to consider the practicality of exploring
+all of the (a)(b)(c)(d) endeavors from \tion{ende}. Is this list too long for
+one NSF project? We think not 
+
+
+
+\subsection{About Four Different Endeavors}\label{tion:four}
+This proposal will explore  four
+{\bf endeavors} (described in this section)
+in order to 
+to collect the data needed to test the  Claims 1,2,3,4 made in the introduction. 
+
+
+Anyone  interested in the ``how'', rather than the ``what'', of this project
+might care to skip to the Management Plan on page \pageref{tion:plan}. That section 
+ describes how  data
+will be collected  and used
+to test Claims 1,2,3,4.  The key thing to note
+there is that many of those
+tests will need to know how to measure
+the {\bf yield} of different {\bf endeavors}:
+\bi
+\item 
+As discussed in \tion{test_bias}, the {\bf yields} for {\em bias in the ML model} are how efficiently and accurately we are able to measure the presence of bias in a model.
+\item 
+As discussed in \tion{quantitative_measure}, the {\bf yield} for {\em quantitative measure of bias}
+is the amount of bias present in the model (based on various metrics). Here depending on metric selected the it can be a minimizing or maximizing problem.
+\item 
+As discussed in \tion{debiasing}, the {\bf yield} for {\em debiasing the ML mode} is with current SOA procedures, how effectively we can remove the bias and who does it effect model's accuracy. Here in case of bias {\em lower} bias is {\em better} while {\em higher} accuracy is {\em better}.
+\item 
+As discussed in \tion{hyper},  two {\bf yields} for {\em optimize model for fairness and performance} are how efficiently we can tune the model with hyperparameter optimization for both fairness and accuracy so that the bias is reduced as well we the accuracy has not not been impacted much.
+\ei
+
+\subsubsection{Endeavoring to test for bias in the ML model}\label{tion:test_bias}
+
+\subsubsection{Endeavoring to quantitative measure of bias in the model}\label{tion:quantitative_measure}
+We say that a label is called \textit{favorable label} if its  value corresponds to an outcome that gives an advantage to the receiver. Examples like - being hired for a job, receiving a loan. \textit{Protected attribute} is an attribute that divides a population into two groups that have difference in terms of benefit received. Like - sex, race. These attributes are not universal, but are specific to application. \textit{Group fairness} is the goal that based on the protected attribute, privileged and unprivileged groups will be treated similarly. \textit{Individual fairness} is the goal of similar individuals will receive similar outcomes.  Our paper studies Group fairness only.
+By definition, ``Bias is a systematic error '' \cite{bias_systemetic}. Our main concern is unwanted bias that puts privileged groups at a systematic advantage and unprivileged groups at a systematic disadvantage. A \textit{fairness metric} is a quantification of unwanted bias in models or training data \cite{IBM}. We used two such fairness metrics in our experiment-
+
+\bi
+\item \textbf{Equal Opportunity Difference(EOD)}:  Delta in true positive rates in unprivileged and privileged groups \cite{IBM}. 
+\item \textbf{Average Odds Difference(AOD)}: Average delta in false positive rates and true positive rates between privileged and unprivileged groups \cite{IBM}.
+\ei
+Both are computed using the input and output datasets to a classifier. A value of 0 implies that both groups have equal benefit, a value lesser than 0 implies higher benefit for the privileged group and a value greater than 0 implies higher benefit for the unprivileged group. In this study, we have taken absolute value of these metrics. 
+
+\subsubsection{Endeavoring to debiasing mode}\label{tion:debiasing}
+
+\subsubsection{Endeavoring to optimize model for fairness and performance}\label{tion:hyper}
+\textbf{Hyperparameter Optimization:}
+Hyperparameter optimization is the process of searching the most optimal hyperparameters in machine learning learners~\cite{biedenkapp2018hyperparameter}~\cite{franceschi2017forward}. There are four common algorithms: grid search, random search, Bayesian optimization and SMBO.
+
+\textit{Grid search}~\cite{bergstra2011algorithms} implements all possible combination of hyperparameters for a learner and tries to find out the best one. It suffers if data have high dimensional space called the ``curse of dimensionality''. It tries all combinations but only a few of the tuning parameters really matter~\cite{bergstra2012random}.
+
+\textit{Random search}~\cite{bergstra2012random} sets up a grid of hyperparameter values and select random combinations to train the model and evaluate. The evaluation is based on a specified probability distribution. The main problem of this method is at each step, it does not use information from the prior steps. 
+
+In contrast to Grid or Random search, \textit{Bayesian optimization}~\cite{pelikan1999boa} keeps track of past evaluation results and use them to build a probabilistic model mapping hyperparameters to a probability of a score on the objective function \cite{Will_Koehrsen}. This probabilistic model is called ``surrogate'' for the objective function. The idea is to find the next set of hyperparameters to evaluate on the actual objective function by selecting hyperparameters that perform best on the surrogate function.
+
+\textit{Sequential model-based optimization (SMBO)} \cite{10.1007/978-3-642-25566-3_40} is a formalization of Bayesian optimization. It runs trials one by one sequentially, each time trying better hyperparameters using Bayesian reasoning and updating the surrogate model \cite{Will_Koehrsen}.
+
+Recent studies have shown that hyperparameter optimization can achieve better performance than using ``off-the-shelf'' configurations in several research areas in software engineering, e.g., software effort estimation\cite{xia2018hyperparameter} and software defect prediction\cite{osman2017hyperparameter}. We are first to apply hyperparameter optimization in software fairness domain.
+
+\textbf{FLASH: A Fast Sequential Model-Based Method:}
+Nair et al. \cite{8469102} proposed a fast SMBO approach called FLASH for multiobjective optimization. FLASH's acquisition function uses Maximum Mean. Maximum Mean returns the sample (configuration) with the highest expected (performance) measure. FLASH models each objective as a separate performance (CART) model. Because the CART model can be trained for one performance measure or dependent value. Nair reports that FLASH runs orders of magnitude faster than NSGA-II, but that was for software configuration problems. This work is the first study to try using  FLASH to optimize for learner performance while at the same time improving fairness.
+
+
+
+
+\begin{table}[]
+\scriptsize
+\caption{The Description of Datasets used in our study, N=\#rows. F=\#features, FAV=favorable.
+``recid''=recidivate}
+\label{tbl:dataset}
+\begin{tabular}{|p{2.75in}@{~}|l@{~}|l@{~}|l@{~}|l@{~}|p{0.7cm}@{~}|p{0.6cm}|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}Protected Attribute} & \multicolumn{2}{c|}{\cellcolor[HTML]{C0C0C0}Label} \\ \cline{4-7} 
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{1}{|c|}{\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Dataset}} & \multicolumn{1}{c|}{\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}N}} & \multicolumn{1}{c|}{\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}F}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Privileged} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Unprivileged} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Fav} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}UnFav} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Adult \\ Census\\ Income \end{tabular} & 48,842 & 14 & \begin{tabular}[c]{@{}l@{}}Sex - Male\\ Race - White\end{tabular} & \begin{tabular}[c]{@{}l@{}}Sex - Female\\ Race - Non-\\ white\end{tabular} & \begin{tabular}[c]{@{}l@{}}High \\ Income\end{tabular} & \begin{tabular}[c]{@{}l@{}}Low \\ Income\end{tabular} \\ \hline
+Compas & 7,214 & 28 & \begin{tabular}[c]{@{}l@{}}Sex - Female\\ Race - Caucasian\end{tabular} & \begin{tabular}[c]{@{}l@{}}Sex - Male\\ Race - Not \\ Caucasian\end{tabular} & \begin{tabular}[c]{@{}l@{}}Did \\ recid\end{tabular} & \begin{tabular}[c]{@{}l@{}}Did \\ not \\ recid\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}German\\ Credit \\ Data \end{tabular} & 1,000 & 20 & \begin{tabular}[c]{@{}l@{}}Sex - Male\\ Age - Old\end{tabular} & \begin{tabular}[c]{@{}l@{}}Sex - Female\\ Age - Young\end{tabular} & Good Credit & Bad Credit \\ \hline
+\end{tabular}
+\footnotetext{https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)}
+\end{table}
+
+ 
+
+
+
+\section{Management Plan}\label{tion:plan}
